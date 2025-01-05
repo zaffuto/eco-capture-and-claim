@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Camera, Check, RefreshCw } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
@@ -57,7 +57,7 @@ export const ImageCapture = () => {
     startCamera();
   };
 
-  useState(() => {
+  useEffect(() => {
     startCamera();
     return () => {
       if (videoRef.current?.srcObject) {

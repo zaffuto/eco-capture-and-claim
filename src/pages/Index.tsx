@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ImageCapture } from "@/components/ImageCapture";
 import { QRScanner } from "@/components/QRScanner";
 import { CouponGenerator } from "@/components/CouponGenerator";
+import { cn } from "@/lib/utils";
 
 const steps = [
   {

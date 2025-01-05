@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { QrCode } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export const QRScanner = () => {
   const [scanning, setScanning] = useState(false);
