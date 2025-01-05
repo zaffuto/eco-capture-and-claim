@@ -2,6 +2,8 @@ import { useState } from "react";
 import { ImageCapture } from "@/components/ImageCapture";
 import { QRScanner } from "@/components/QRScanner";
 import { CouponGenerator } from "@/components/CouponGenerator";
+import { Auth } from "@/components/Auth";
+import { useAuth } from "@/contexts/AuthContext";
 import { cn } from "@/lib/utils";
 
 const steps = [
@@ -24,6 +26,7 @@ const steps = [
 
 const Index = () => {
   const [currentStep, setCurrentStep] = useState(0);
+  const { user, loading } = useAuth();
 
   const renderStep = () => {
     switch (currentStep) {
@@ -37,6 +40,32 @@ const Index = () => {
         return null;
     }
   };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-white to-eco-light p-6 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-eco-primary"></div>
+      </div>
+    );
+  }
+
+  if (!user) {
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-white to-eco-light p-6">
+        <div className="max-w-2xl mx-auto space-y-8">
+          <div className="space-y-2 text-center animate-fade-up">
+            <h1 className="text-3xl font-bold text-gray-900">
+              Bienvenido a EcoCupón
+            </h1>
+            <p className="text-gray-600">
+              Inicia sesión para comenzar a reciclar y obtener cupones
+            </p>
+          </div>
+          <Auth />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-eco-light p-6">
