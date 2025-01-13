@@ -61,10 +61,6 @@ export const Auth = () => {
           redirectTo={window.location.origin + "/auth/callback"}
           view="sign_in"
           showLinks={false}
-          onError={(error) => {
-            console.error("Auth error:", error);
-            setError(error.message);
-          }}
         />
       </div>
     </div>
