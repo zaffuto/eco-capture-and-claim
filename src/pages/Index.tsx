@@ -28,6 +28,8 @@ const Index = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const { user, loading } = useAuth();
 
+  console.log("Index component rendered", { user, loading });
+
   const renderStep = () => {
     switch (currentStep) {
       case 0:
@@ -50,6 +52,7 @@ const Index = () => {
   }
 
   if (!user) {
+    console.log("User not authenticated, showing Auth component");
     return (
       <div className="min-h-screen bg-gradient-to-b from-white to-eco-light p-6">
         <div className="max-w-2xl mx-auto space-y-8">
