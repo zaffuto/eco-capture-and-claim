@@ -27,10 +27,6 @@ export const Auth = () => {
         console.log("User profile updated");
       }
 
-      if (event === "USER_DELETED") {
-        console.log("User account deleted");
-      }
-
       // Handle authentication errors
       if (event === "INITIAL_SESSION") {
         const currentError = (session as any)?.error;
@@ -71,7 +67,7 @@ export const Auth = () => {
             },
           }}
           providers={["google"]}
-          redirectTo={window.location.origin + "/auth/callback"}
+          redirectTo={`${window.location.origin}/auth/callback`}
           view="sign_in"
           showLinks={false}
         />
