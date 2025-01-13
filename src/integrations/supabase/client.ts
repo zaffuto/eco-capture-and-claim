@@ -14,9 +14,10 @@ console.log("Current environment:", import.meta.env.MODE);
 
 if (!SUPABASE_ANON_KEY) {
   console.error('Error: VITE_SUPABASE_ANON_KEY is not set in environment variables');
+  throw new Error('VITE_SUPABASE_ANON_KEY environment variable is required. Please check your environment configuration.');
 }
 
 // Import the supabase client like this:
 // import { supabase } from "@/integrations/supabase/client";
 
-export const supabase = createClient<Database>(SUPABASE_URL, SUPABASE_ANON_KEY || '');
+export const supabase = createClient<Database>(SUPABASE_URL, SUPABASE_ANON_KEY);
