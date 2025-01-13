@@ -26,6 +26,19 @@ export const Auth = () => {
       if (event === "USER_UPDATED") {
         console.log("User profile updated");
       }
+
+      if (event === "USER_DELETED") {
+        console.log("User account deleted");
+      }
+
+      // Handle authentication errors
+      if (event === "INITIAL_SESSION") {
+        const currentError = (session as any)?.error;
+        if (currentError) {
+          console.error("Authentication error:", currentError);
+          setError(currentError.message);
+        }
+      }
     });
 
     return () => subscription.unsubscribe();
