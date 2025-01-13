@@ -47,7 +47,7 @@ export const Auth = () => {
   // Set the redirect URL based on the environment
   const redirectUrl = isDevelopment 
     ? `${window.location.origin}/auth/callback`
-    : 'https://eco-capture-and-claim.vercel.app/auth/callback';
+    : 'https://ecocupon-2025.vercel.app/auth/callback';
 
   console.log("Current redirect URL:", redirectUrl);
   console.log("Current environment:", isDevelopment ? "Development" : "Production");
