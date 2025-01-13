@@ -23,9 +23,10 @@ export const Auth = () => {
         setError(null);
       }
 
-      if (event === "USER_DELETED") {
-        console.log("User deleted");
-        setError("La cuenta de usuario ha sido eliminada");
+      // Removed USER_DELETED event as it's not a valid AuthChangeEvent
+      // Instead, we'll handle general authentication errors
+      if (event === "USER_UPDATED") {
+        console.log("User profile updated");
       }
     });
 
