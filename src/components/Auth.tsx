@@ -23,8 +23,6 @@ export const Auth = () => {
         setError(null);
       }
 
-      // Removed USER_DELETED event as it's not a valid AuthChangeEvent
-      // Instead, we'll handle general authentication errors
       if (event === "USER_UPDATED") {
         console.log("User profile updated");
       }
@@ -56,7 +54,11 @@ export const Auth = () => {
             },
           }}
           providers={["google"]}
-          redirectTo={`${window.location.origin}/auth/callback`}
+          redirectTo={window.location.origin + "/auth/callback"}
+          onError={(error) => {
+            console.error("Auth error:", error);
+            setError(error.message);
+          }}
         />
       </div>
     </div>
