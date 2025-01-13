@@ -3,6 +3,7 @@
 ## Project info
 
 **URL**: https://lovable.dev/projects/a02b7937-4d18-4e9f-8f28-1e15132bcf03
+**Repository**: https://github.com/zaffuto/Ecocupon_2025
 
 ## How can I edit this code?
 
@@ -24,10 +25,10 @@ Follow these steps:
 
 ```sh
 # Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+git clone https://github.com/zaffuto/Ecocupon_2025.git
 
 # Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+cd Ecocupon_2025
 
 # Step 3: Install the necessary dependencies.
 npm i
