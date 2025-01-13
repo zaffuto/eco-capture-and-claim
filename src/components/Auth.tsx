@@ -40,9 +40,7 @@ export const Auth = () => {
     return () => subscription.unsubscribe();
   }, [navigate]);
 
-  const redirectUrl = typeof window !== 'undefined' 
-    ? `${window.location.origin}/auth/callback`
-    : 'https://ecocupon-2025.vercel.app/auth/callback';
+  const redirectUrl = 'https://ecocupon-2025.vercel.app/auth/callback';
 
   return (
     <div className="max-w-md w-full mx-auto space-y-4">
