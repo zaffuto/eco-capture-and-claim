@@ -3,7 +3,6 @@ import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { supabase } from "@/integrations/supabase/client";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AuthError } from "@supabase/supabase-js";
 import { Alert, AlertDescription } from "./ui/alert";
 
 export const Auth = () => {
@@ -23,15 +22,15 @@ export const Auth = () => {
         console.log("User signed out");
         setError(null);
       }
+
+      if (event === "USER_DELETED") {
+        console.log("User deleted");
+        setError("La cuenta de usuario ha sido eliminada");
+      }
     });
 
     return () => subscription.unsubscribe();
   }, [navigate]);
-
-  const handleError = (error: AuthError) => {
-    console.error("Auth error:", error);
-    setError(error.message);
-  };
 
   return (
     <div className="max-w-md w-full mx-auto space-y-4">
@@ -57,7 +56,6 @@ export const Auth = () => {
           }}
           providers={["google"]}
           redirectTo={`${window.location.origin}/auth/callback`}
-          onError={handleError}
         />
       </div>
     </div>
