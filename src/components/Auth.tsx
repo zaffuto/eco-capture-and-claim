@@ -55,7 +55,9 @@ export const Auth = () => {
           }}
           providers={["google"]}
           redirectTo={window.location.origin + "/auth/callback"}
-          onError={(error) => {
+          view="sign_in"
+          showLinks={false}
+          onAuthError={(error) => {
             console.error("Auth error:", error);
             setError(error.message);
           }}
