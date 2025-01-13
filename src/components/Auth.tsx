@@ -40,7 +40,17 @@ export const Auth = () => {
     return () => subscription.unsubscribe();
   }, [navigate]);
 
-  const redirectUrl = 'https://ecocupon-2025.vercel.app/auth/callback';
+  // Get the current hostname to determine the environment
+  const isDevelopment = window.location.hostname === 'localhost' || 
+                       window.location.hostname.includes('lovableproject.com');
+  
+  // Set the redirect URL based on the environment
+  const redirectUrl = isDevelopment 
+    ? `${window.location.origin}/auth/callback`
+    : 'https://ecocupon-2025.vercel.app/auth/callback';
+
+  console.log("Current redirect URL:", redirectUrl);
+  console.log("Current environment:", isDevelopment ? "Development" : "Production");
 
   return (
     <div className="max-w-md w-full mx-auto space-y-4">
