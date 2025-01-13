@@ -52,12 +52,16 @@ export const Auth = () => {
                 },
               },
             },
+            style: {
+              button: { background: '#10B981', color: 'white' },
+              anchor: { color: '#059669' },
+            },
           }}
           providers={["google"]}
           redirectTo={window.location.origin + "/auth/callback"}
           view="sign_in"
           showLinks={false}
-          onAuthError={(error) => {
+          onError={(error) => {
             console.error("Auth error:", error);
             setError(error.message);
           }}
