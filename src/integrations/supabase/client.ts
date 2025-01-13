@@ -13,8 +13,8 @@ console.log("SUPABASE_ANON_KEY exists:", !!SUPABASE_ANON_KEY);
 console.log("Current environment:", import.meta.env.MODE);
 
 if (!SUPABASE_ANON_KEY) {
-  console.error('Error: VITE_SUPABASE_ANON_KEY is not set in environment variables');
-  throw new Error('VITE_SUPABASE_ANON_KEY environment variable is required. Please check your environment configuration.');
+  console.error('Error: VITE_SUPABASE_ANON_KEY no está configurada en las variables de entorno');
+  throw new Error('La variable de entorno VITE_SUPABASE_ANON_KEY es requerida. Por favor, configura las variables de entorno en Vercel.');
 }
 
 // Import the supabase client like this:
