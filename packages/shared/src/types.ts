@@ -1,8 +1,4 @@
-import { z } from 'zod';
-import { UserSchema } from './schemas';
-
-export type User = z.infer<typeof UserSchema>;
-
+// Tipos adicionales no cubiertos por los schemas
 export interface EcoCupon {
   id: string;
   code: string;
