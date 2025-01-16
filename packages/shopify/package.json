@@ -2,8 +2,9 @@
   "name": "@eco/shopify",
   "version": "0.0.0",
   "private": true,
-  "main": "./src/index.ts",
-  "types": "./src/index.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "build": "tsup",
     "build:dev": "tsup --watch",
@@ -17,7 +18,8 @@
     "@shopify/polaris": "^12.0.0",
     "@shopify/shopify-api": "^8.0.2",
     "@shopify/app-bridge-utils": "^3.5.1",
-    "react": "^18.2.0"
+    "react": "^18.2.0",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@types/react": "^18.2.25",
@@ -27,6 +29,7 @@
   },
   "peerDependencies": {
     "react": "^18.2.0",
-    "@eco/shared": "workspace:*"
+    "@eco/shared": "workspace:*",
+    "@eco/database": "workspace:*"
   }
 }

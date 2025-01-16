@@ -7,4 +7,7 @@ export default defineConfig({
   splitting: false,
   sourcemap: true,
   clean: true,
+  jsx: 'react',
+  external: ['@eco/database', '@shopify/app-bridge', 'react', 'react-dom'],
+  noExternal: ['@eco/shared'],
 });
