@@ -12,7 +12,7 @@ export class EcoCaptureBot {
     this.commands = new Map();
   }
 
-  private async initialize() {
+  public async initialize() {
     try {
       // Registrar comandos
       this.registerCommands();
