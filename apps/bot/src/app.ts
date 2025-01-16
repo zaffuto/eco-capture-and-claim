@@ -10,7 +10,6 @@ export class EcoCaptureBot {
   constructor() {
     this.bot = new WhatsAppAdapter();
     this.commands = new Map();
-    this.initialize();
   }
 
   private async initialize() {
@@ -77,6 +76,7 @@ export class EcoCaptureBot {
 
 // Crear instancia del bot y mantenerla viva
 const bot = new EcoCaptureBot();
+bot.initialize();
 
 // Manejar errores no capturados
 process.on('uncaughtException', (error) => {
