@@ -4,18 +4,29 @@ import { supabase } from "@/integrations/supabase/client";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Alert, AlertDescription } from "./ui/alert";
+import { AuthError } from "@supabase/supabase-js";
 
 export const Auth = () => {
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
       console.log("Auth state changed:", event, session);
       
       if (event === "SIGNED_IN") {
         console.log("User signed in successfully");
-        navigate("/");
+        // Get the session to verify authentication
+        const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
+        if (sessionError) {
+          console.error("Session error:", sessionError);
+          setError(sessionError.message);
+          return;
+        }
+        if (sessionData.session) {
+          console.log("Valid session obtained:", sessionData.session.user);
+          navigate("/");
+        }
       }
       
       if (event === "SIGNED_OUT") {
@@ -37,6 +48,19 @@ export const Auth = () => {
       }
     });
 
+    // Test the authentication state on component mount
+    const checkAuth = async () => {
+      const { data: { session }, error } = await supabase.auth.getSession();
+      if (error) {
+        console.error("Auth check error:", error);
+        setError(error.message);
+      } else if (session) {
+        console.log("User is already authenticated:", session.user);
+      }
+    };
+
+    checkAuth();
+
     return () => subscription.unsubscribe();
   }, [navigate]);
 
@@ -54,6 +78,11 @@ export const Auth = () => {
   console.log("Current redirect URL:", redirectUrl);
   console.log("Current hostname:", window.location.hostname);
   console.log("Current environment:", isDevelopment ? "Development" : "Production");
+
+  const handleAuthError = (error: AuthError) => {
+    console.error("Auth error:", error);
+    setError(error.message);
+  };
 
   return (
     <div className="max-w-md w-full mx-auto space-y-4">
