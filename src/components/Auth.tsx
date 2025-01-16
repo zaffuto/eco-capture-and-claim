@@ -13,6 +13,7 @@ export const Auth = () => {
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
       console.log("Auth state changed:", event, session);
+      console.log("Current URL:", window.location.href);
       
       if (event === "SIGNED_IN") {
         console.log("User signed in successfully");
