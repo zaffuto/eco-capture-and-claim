@@ -8,10 +8,17 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 console.log("Supabase Configuration:");
 console.log("SUPABASE_URL:", SUPABASE_URL);
 console.log("SUPABASE_ANON_KEY exists:", !!SUPABASE_ANON_KEY);
-console.log("Current environment:", import.meta.env.MODE);
+console.log("Current environment:", process.env.NODE_ENV);
+console.log("Callback URL:", `${SUPABASE_URL}/auth/v1/callback`);
 
-// Create and export the supabase client
-export const supabase = createClient<Database>(SUPABASE_URL, SUPABASE_ANON_KEY);
+export const supabase = createClient<Database>(SUPABASE_URL, SUPABASE_ANON_KEY, {
+  auth: {
+    autoRefreshToken: true,
+    persistSession: true,
+    detectSessionInUrl: true,
+    flowType: 'pkce',
+  },
+});
 
 // Test the connection
 supabase.auth.getSession().then(({ data, error }) => {
