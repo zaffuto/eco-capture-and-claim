@@ -1,31 +1,47 @@
-export const ENV = {
-  SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://bvpneuiyavayfthqjlye.supabase.co',
-  SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ2cG5ldWl5YXZheWZ0aHFqbHllIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQ4OTQwNzMsImV4cCI6MjA1MDQ3MDA3M30.zrQZc6-l_pWUJJ7TohhPOmo7zPnKOgCCmuyMorI2WI4',
-  APP_URL: process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000',
-  
-  // Firebase (opcional)
-  FIREBASE: {
-    apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
-    authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
-    projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-    storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
-    messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
-    appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
-  },
+import { z } from 'zod';
 
-  // API Keys (opcional)
+const envSchema = z.object({
+  SUPABASE_URL: z.string().url(),
+  SUPABASE_ANON_KEY: z.string().min(1),
+  APP_URL: z.string().url(),
+  FIREBASE_API_KEY: z.string().optional(),
+  FIREBASE_AUTH_DOMAIN: z.string().optional(),
+  FIREBASE_PROJECT_ID: z.string().optional(),
+  FIREBASE_STORAGE_BUCKET: z.string().optional(),
+  FIREBASE_MESSAGING_SENDER_ID: z.string().optional(),
+  FIREBASE_APP_ID: z.string().optional(),
+  WHATSAPP_API_TOKEN: z.string().optional(),
+  WHATSAPP_PHONE_NUMBER_ID: z.string().optional(),
+  SHOPIFY_SHOP_NAME: z.string().optional(),
+  SHOPIFY_ACCESS_TOKEN: z.string().optional(),
+  MONDAY_API_TOKEN: z.string().optional(),
+});
+
+const processEnv = {
+  SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
+  SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+  APP_URL: process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000',
+  FIREBASE_API_KEY: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  FIREBASE_AUTH_DOMAIN: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  FIREBASE_PROJECT_ID: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  FIREBASE_STORAGE_BUCKET: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  FIREBASE_MESSAGING_SENDER_ID: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  FIREBASE_APP_ID: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
   WHATSAPP_API_TOKEN: process.env.WHATSAPP_API_TOKEN,
   WHATSAPP_PHONE_NUMBER_ID: process.env.WHATSAPP_PHONE_NUMBER_ID,
   SHOPIFY_SHOP_NAME: process.env.SHOPIFY_SHOP_NAME,
   SHOPIFY_ACCESS_TOKEN: process.env.SHOPIFY_ACCESS_TOKEN,
   MONDAY_API_TOKEN: process.env.MONDAY_API_TOKEN,
-} as const;
+};
 
-// Validación básica de variables requeridas
-const requiredEnvVars = ['SUPABASE_URL', 'SUPABASE_ANON_KEY'] as const;
+const parsed = envSchema.safeParse(processEnv);
 
-for (const envVar of requiredEnvVars) {
-  if (!ENV[envVar]) {
-    throw new Error(`Missing required environment variable: ${envVar}`);
-  }
+if (!parsed.success) {
+  console.error(
+    '❌ Invalid environment variables:',
+    JSON.stringify(parsed.error.format(), null, 2)
+  );
+  throw new Error('Invalid environment variables');
 }
+
+export const ENV = parsed.data;

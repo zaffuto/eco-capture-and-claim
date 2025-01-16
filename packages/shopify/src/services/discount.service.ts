@@ -1,11 +1,30 @@
 import { supabase } from '@eco/database';
 import { createClient } from '@shopify/shopify-api';
 import { config } from '../config';
+import { z } from 'zod';
+
+// Validación de entrada
+const createEcoCuponSchema = z.object({
+  code: z.string().min(3).max(50).regex(/^[A-Z0-9-_]+$/),
+  discountType: z.enum(['percentage', 'fixed_amount']),
+  discountValue: z.number().positive().max(100),
+  minPurchaseAmount: z.number().positive().optional(),
+  maxDiscountAmount: z.number().positive().optional(),
+  startDate: z.date(),
+  expiryDate: z.date(),
+  usageLimit: z.number().int().positive().optional(),
+  userId: z.string().uuid(),
+});
 
 export class DiscountService {
   private shopify;
+  private static instance: DiscountService;
 
-  constructor() {
+  private constructor() {
+    if (!config.SHOPIFY_API_KEY || !config.SHOPIFY_API_SECRET || !config.SHOPIFY_ACCESS_TOKEN) {
+      throw new Error('Missing required Shopify configuration');
+    }
+
     this.shopify = createClient({
       apiKey: config.SHOPIFY_API_KEY,
       apiSecretKey: config.SHOPIFY_API_SECRET,
@@ -15,56 +34,65 @@ export class DiscountService {
     });
   }
 
-  async createEcoCupon({
-    code,
-    discountType,
-    discountValue,
-    minPurchaseAmount,
-    maxDiscountAmount,
-    startDate,
-    expiryDate,
-    usageLimit,
-    userId
-  }) {
+  public static getInstance(): DiscountService {
+    if (!DiscountService.instance) {
+      DiscountService.instance = new DiscountService();
+    }
+    return DiscountService.instance;
+  }
+
+  async createEcoCupon(input: z.infer<typeof createEcoCuponSchema>) {
     try {
+      // Validar entrada
+      const data = createEcoCuponSchema.parse(input);
+
+      // Validar fechas
+      if (data.expiryDate <= data.startDate) {
+        throw new Error('La fecha de expiración debe ser posterior a la fecha de inicio');
+      }
+
+      if (data.startDate < new Date()) {
+        throw new Error('La fecha de inicio no puede ser en el pasado');
+      }
+
       // Crear Price Rule en Shopify
       const priceRule = await this.shopify.priceRule.create({
-        title: `Eco Cupon - ${code}`,
+        title: `Eco Cupon - ${data.code}`,
         target_type: 'line_item',
         target_selection: 'all',
-        allocation_method: discountType === 'percentage' ? 'across' : 'each',
-        value_type: discountType === 'percentage' ? 'percentage' : 'fixed_amount',
-        value: `-${discountValue}`,
+        allocation_method: data.discountType === 'percentage' ? 'across' : 'each',
+        value_type: data.discountType === 'percentage' ? 'percentage' : 'fixed_amount',
+        value: `-${data.discountValue}`,
         customer_selection: 'all',
-        starts_at: startDate,
-        ends_at: expiryDate,
-        usage_limit: usageLimit,
+        starts_at: data.startDate.toISOString(),
+        ends_at: data.expiryDate.toISOString(),
+        usage_limit: data.usageLimit,
         once_per_customer: true,
-        prerequisite_subtotal_range: minPurchaseAmount ? {
-          greater_than_or_equal_to: minPurchaseAmount
+        prerequisite_subtotal_range: data.minPurchaseAmount ? {
+          greater_than_or_equal_to: data.minPurchaseAmount.toString()
         } : undefined,
       });
 
       // Crear Discount Code en Shopify
       const discountCode = await this.shopify.discountCode.create(priceRule.id, {
-        code: code,
+        code: data.code,
       });
 
-      // Guardar en Supabase
-      const { data, error } = await supabase
+      // Guardar en Supabase con prepared statement
+      const { data: cupon, error } = await supabase
         .from('eco_cupons')
         .insert({
-          code,
-          discount_type: discountType,
-          discount_value: discountValue,
-          min_purchase_amount: minPurchaseAmount,
-          max_discount_amount: maxDiscountAmount,
-          start_date: startDate,
-          expiry_date: expiryDate,
-          usage_limit: usageLimit,
+          code: data.code,
+          discount_type: data.discountType,
+          discount_value: data.discountValue,
+          min_purchase_amount: data.minPurchaseAmount,
+          max_discount_amount: data.maxDiscountAmount,
+          start_date: data.startDate.toISOString(),
+          expiry_date: data.expiryDate.toISOString(),
+          usage_limit: data.usageLimit,
           shopify_price_rule_id: priceRule.id,
           shopify_discount_code_id: discountCode.id,
-          user_id: userId,
+          user_id: data.userId,
           status: 'active'
         })
         .select()
@@ -72,7 +100,7 @@ export class DiscountService {
 
       if (error) throw error;
 
-      return data;
+      return cupon;
 
     } catch (error) {
       console.error('Error creating eco cupon:', error);
@@ -82,11 +110,17 @@ export class DiscountService {
 
   async validateEcoCupon(code: string) {
     try {
-      // Verificar en Supabase
+      // Sanitizar entrada
+      const sanitizedCode = code.trim().toUpperCase();
+      if (!/^[A-Z0-9-_]+$/.test(sanitizedCode)) {
+        return { valid: false, message: 'Código inválido' };
+      }
+
+      // Verificar en Supabase usando prepared statement
       const { data: cupon, error } = await supabase
         .from('eco_cupons')
         .select('*')
-        .eq('code', code)
+        .eq('code', sanitizedCode)
         .eq('status', 'active')
         .single();
 
@@ -115,6 +149,11 @@ export class DiscountService {
 
   private async deactivateEcoCupon(cuponId: string) {
     try {
+      // Validar UUID
+      if (!/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(cuponId)) {
+        throw new Error('Invalid cupon ID format');
+      }
+
       const { data: cupon, error } = await supabase
         .from('eco_cupons')
         .update({ status: 'inactive' })
@@ -141,10 +180,16 @@ export class DiscountService {
 
   async incrementCuponUsage(code: string) {
     try {
+      // Sanitizar entrada
+      const sanitizedCode = code.trim().toUpperCase();
+      if (!/^[A-Z0-9-_]+$/.test(sanitizedCode)) {
+        throw new Error('Invalid coupon code format');
+      }
+
       const { data: cupon, error } = await supabase
         .from('eco_cupons')
         .update({ times_used: sql`times_used + 1` })
-        .eq('code', code)
+        .eq('code', sanitizedCode)
         .select()
         .single();
 
