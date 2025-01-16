@@ -5,3 +5,5 @@ export { RecyclingProductList } from './components/RecyclingProductList';
 
 // Re-export common types
 export type { AppConfig } from '@shopify/app-bridge';
+
+export * from './services/discount.service';
