@@ -1,9 +1,7 @@
-// Tipos comunes compartidos entre los paquetes
-export interface User {
-  id: string;
-  email: string;
-  name?: string;
-}
+import { z } from 'zod';
+import { UserSchema } from './schemas';
+
+export type User = z.infer<typeof UserSchema>;
 
 export interface EcoCupon {
   id: string;
