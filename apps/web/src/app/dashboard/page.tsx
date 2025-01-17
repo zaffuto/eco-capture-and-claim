@@ -27,7 +27,7 @@ async function getData() {
 function Loading() {
   return (
     <Card>
-      <BlockStack gap="3">
+      <BlockStack gap="4">
         <Text as="h2" variant="headingLg">Loading...</Text>
       </BlockStack>
     </Card>
@@ -62,7 +62,7 @@ async function DashboardContent() {
         {mockProducts.map((product) => (
           <Layout.Section oneHalf key={product.id}>
             <Card>
-              <BlockStack gap="3">
+              <BlockStack gap="4">
                 <div style={{ textAlign: 'center', padding: '1rem' }}>
                   <Thumbnail
                     source={product.image}
@@ -70,7 +70,7 @@ async function DashboardContent() {
                     size="large"
                   />
                 </div>
-                <BlockStack gap="2">
+                <BlockStack gap="4">
                   <Text as="h2" variant="headingLg">{product.title}</Text>
                   <Text as="p" variant="bodyMd">{product.description}</Text>
                   <Text as="p" variant="headingMd">{product.price}</Text>
@@ -87,13 +87,13 @@ async function DashboardContent() {
         ))}
       </Layout>
 
-      <BlockStack gap="3">
+      <BlockStack gap="4">
         <div style={{ marginTop: '2rem' }}>
           <Text as="h2" variant="headingLg">Recent Recycling Records</Text>
         </div>
         {records.map((record: RecyclingRecord & { certificates: Certificate[] }) => (
           <Card key={record.id}>
-            <BlockStack gap="2">
+            <BlockStack gap="4">
               <Text as="h3" variant="headingMd">{record.material_type}</Text>
               <Text as="p">{record.weight} kg</Text>
               <Text as="p">Certificates: {record.certificates?.length || 0}</Text>
