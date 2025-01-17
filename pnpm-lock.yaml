@@ -88,16 +88,16 @@ importers:
         specifier: ^12.0.0
         version: 12.27.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@supabase/auth-helpers-nextjs':
-        specifier: ^0.10.0
-        version: 0.10.0(@supabase/supabase-js@2.47.15)
+        specifier: ^0.8.7
+        version: 0.8.7(@supabase/supabase-js@2.47.15)
       '@supabase/auth-ui-react':
-        specifier: 0.4.7
+        specifier: ^0.4.7
         version: 0.4.7(@supabase/supabase-js@2.47.15)
       '@supabase/auth-ui-shared':
-        specifier: 0.1.8
+        specifier: ^0.1.8
         version: 0.1.8(@supabase/supabase-js@2.47.15)
       '@supabase/supabase-js':
-        specifier: ^2.47.15
+        specifier: ^2.39.2
         version: 2.47.15
       next:
         specifier: 14.0.4
@@ -109,23 +109,23 @@ importers:
         specifier: ^18.2.0
         version: 18.3.1(react@18.3.1)
       vite:
-        specifier: ^5.0.0
+        specifier: ^5.0.11
         version: 5.4.11(@types/node@20.17.14)(terser@5.37.0)
     devDependencies:
       '@types/node':
-        specifier: ^20.10.0
+        specifier: ^20.10.6
         version: 20.17.14
       '@types/react':
-        specifier: ^18.2.0
+        specifier: ^18.2.47
         version: 18.3.18
       '@types/react-dom':
-        specifier: ^18.2.0
+        specifier: ^18.2.18
         version: 18.3.5(@types/react@18.3.18)
       '@vitejs/plugin-react':
-        specifier: ^4.2.0
+        specifier: ^4.2.1
         version: 4.3.4(vite@5.4.11(@types/node@20.17.14)(terser@5.37.0))
       autoprefixer:
-        specifier: 10.4.20
+        specifier: ^10.4.16
         version: 10.4.20(postcss@8.5.1)
       eslint:
         specifier: ^8.56.0
@@ -134,13 +134,13 @@ importers:
         specifier: 14.0.4
         version: 14.0.4(eslint@8.57.1)(typescript@5.7.3)
       postcss:
-        specifier: 8.5.1
+        specifier: ^8.4.33
         version: 8.5.1
       tailwindcss:
-        specifier: 3.4.17
+        specifier: ^3.4.1
         version: 3.4.17(ts-node@10.9.2(@types/node@20.17.14)(typescript@5.7.3))
       typescript:
-        specifier: ^5.3.0
+        specifier: ^5.3.3
         version: 5.7.3
 
   packages/database:
@@ -1813,17 +1813,17 @@ packages:
   '@stitches/core@1.2.8':
     resolution: {integrity: sha512-Gfkvwk9o9kE9r9XNBmJRfV8zONvXThnm1tcuojL04Uy5uRyqg93DC83lDebl0rocZCfKSjUv+fWYtMQmEDJldg==}
 
-  '@supabase/auth-helpers-nextjs@0.10.0':
-    resolution: {integrity: sha512-2dfOGsM4yZt0oS4TPiE7bD4vf7EVz7NRz/IJrV6vLg0GP7sMUx8wndv2euLGq4BjN9lUCpu6DG/uCC8j+ylwPg==}
+  '@supabase/auth-helpers-nextjs@0.8.7':
+    resolution: {integrity: sha512-iYdOjFo0GkRvha340l8JdCiBiyXQuG9v8jnq7qMJ/2fakrskRgHTCOt7ryWbip1T6BExcWKC8SoJrhCzPOxhhg==}
     deprecated: This package is now deprecated - please use the @supabase/ssr package instead.
     peerDependencies:
-      '@supabase/supabase-js': ^2.39.8
+      '@supabase/supabase-js': ^2.19.0
 
-  '@supabase/auth-helpers-shared@0.7.0':
-    resolution: {integrity: sha512-FBFf2ei2R7QC+B/5wWkthMha8Ca2bWHAndN+syfuEUUfufv4mLcAgBCcgNg5nJR8L0gZfyuaxgubtOc9aW3Cpg==}
+  '@supabase/auth-helpers-shared@0.6.3':
+    resolution: {integrity: sha512-xYQRLFeFkL4ZfwC7p9VKcarshj3FB2QJMgJPydvOY7J5czJe6xSG5/wM1z63RmAzGbCkKg+dzpq61oeSyWiGBQ==}
     deprecated: This package is now deprecated - please use the @supabase/ssr package instead.
     peerDependencies:
-      '@supabase/supabase-js': ^2.39.8
+      '@supabase/supabase-js': ^2.19.0
 
   '@supabase/auth-js@2.67.3':
     resolution: {integrity: sha512-NJDaW8yXs49xMvWVOkSIr8j46jf+tYHV0wHhrwOaLLMZSFO4g6kKAf+MfzQ2RaD06OCUkUHIzctLAxjTgEVpzw==}
@@ -7246,13 +7246,13 @@ snapshots:
 
   '@stitches/core@1.2.8': {}
 
-  '@supabase/auth-helpers-nextjs@0.10.0(@supabase/supabase-js@2.47.15)':
+  '@supabase/auth-helpers-nextjs@0.8.7(@supabase/supabase-js@2.47.15)':
     dependencies:
-      '@supabase/auth-helpers-shared': 0.7.0(@supabase/supabase-js@2.47.15)
+      '@supabase/auth-helpers-shared': 0.6.3(@supabase/supabase-js@2.47.15)
       '@supabase/supabase-js': 2.47.15
       set-cookie-parser: 2.7.1
 
-  '@supabase/auth-helpers-shared@0.7.0(@supabase/supabase-js@2.47.15)':
+  '@supabase/auth-helpers-shared@0.6.3(@supabase/supabase-js@2.47.15)':
     dependencies:
       '@supabase/supabase-js': 2.47.15
       jose: 4.15.9
