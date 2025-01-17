@@ -27,3 +27,15 @@ dist-ssr
 .env
 .env.*
 !.env.example
+
+# Next.js
+.next/
+out/
+build/
+.vercel
+*.tsbuildinfo
+next-env.d.ts
+
+# Package locks (since we're using pnpm)
+package-lock.json
+yarn.lock
