@@ -19,12 +19,12 @@
     "test": "npm run test --workspaces"
   },
   "devDependencies": {
-    "@types/node": "^20.8.2",
-    "@types/react": "^18.2.25",
-    "eslint": "^8.50.0",
+    "@types/node": "^20.17.14",
+    "@types/react": "^18.3.18",
+    "eslint": "8.56.0",
     "prettier": "^3.0.3",
-    "typescript": "^5.2.2",
-    "turbo": "^1.10.16"
+    "turbo": "^1.13.4",
+    "typescript": "^5.2.2"
   },
   "engines": {
     "node": ">=20.10.0",
@@ -34,7 +34,7 @@
     "@shopify/app-bridge": "3.5.1",
     "@shopify/app-bridge-react": "3.5.1",
     "@shopify/app-bridge-utils": "3.5.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react": "18.0.0",
+    "react-dom": "18.0.0"
   }
 }
