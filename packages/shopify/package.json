@@ -17,15 +17,15 @@
     "@shopify/app-bridge-react": "^3.7.9",
     "@shopify/app-bridge-utils": "^3.5.1",
     "@shopify/polaris": "^12.10.0",
-    "@shopify/shopify-api": "^9.0.1",
+    "@shopify/shopify-api": "^9.2.0",
     "react": "^18.2.0",
     "zod": "^3.22.4"
   },
   "devDependencies": {
-    "@types/react": "^18.2.25",
-    "eslint": "^8.50.0",
-    "tsup": "^7.2.0",
-    "typescript": "^5.2.2"
+    "@types/react": "^18.2.47",
+    "eslint": "^8.57.0",
+    "tsup": "^8.0.1",
+    "typescript": "^5.3.3"
   },
   "peerDependencies": {
     "@eco/database": "workspace:*",
