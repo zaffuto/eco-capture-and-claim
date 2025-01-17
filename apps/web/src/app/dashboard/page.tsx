@@ -27,7 +27,7 @@ async function getData() {
 function Loading() {
   return (
     <Card>
-      <BlockStack gap="extraLoose">
+      <BlockStack gap="4">
         <Text as="h2" variant="headingLg">Loading...</Text>
       </BlockStack>
     </Card>
@@ -38,10 +38,10 @@ async function DashboardContent() {
   const records = await getData();
 
   return (
-    <BlockStack gap="extraLoose">
+    <BlockStack gap="4">
       {records.map((record: RecyclingRecord & { certificates: Certificate[] }) => (
         <Card key={record.id}>
-          <BlockStack gap="loose">
+          <BlockStack gap="2">
             <Text as="h3" variant="headingMd">{record.material_type}</Text>
             <Text as="p">{record.weight} kg</Text>
             <Text as="p">Certificates: {record.certificates?.length || 0}</Text>
@@ -55,7 +55,7 @@ async function DashboardContent() {
 export default function DashboardPage() {
   return (
     <div className="p-4">
-      <BlockStack gap="extraLoose">
+      <BlockStack gap="4">
         <Text as="h1" variant="headingXl">Dashboard</Text>
         <Suspense fallback={<Loading />}>
           <DashboardContent />
