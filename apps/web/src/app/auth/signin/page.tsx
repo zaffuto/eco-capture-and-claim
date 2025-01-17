@@ -31,7 +31,7 @@ export default function SignIn() {
                   appearance={{ theme: ThemeSupa }}
                   theme="light"
                   providers={['google']}
-                  redirectTo={`${window.location.origin}/auth/callback`}
+                  redirectTo="https://bvpneuiyavayfthqjlye.supabase.co/auth/v1/callback"
                 />
               </div>
             </BlockStack>
