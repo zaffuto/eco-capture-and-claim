@@ -13,7 +13,7 @@ export default function SignIn() {
       <Layout>
         <Layout.Section>
           <Card>
-            <BlockStack gap="4">
+            <BlockStack gap="5">
               <Text as="h1" variant="headingLg">
                 Sign in to Eco Capture
               </Text>
