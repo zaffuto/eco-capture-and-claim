@@ -13,23 +13,24 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "@shopify/app-bridge": "^3.7.10",
-    "@shopify/app-bridge-react": "^4.1.6",
-    "@shopify/app-bridge-utils": "^3.5.1",
-    "@shopify/polaris": "^13.9.2",
+    "@shopify/app-bridge": "3.5.1",
+    "@shopify/app-bridge-react": "3.5.1",
+    "@shopify/app-bridge-utils": "3.5.1",
+    "@shopify/polaris": "10.49.1",
     "@shopify/shopify-api": "^11.7.0",
-    "react": "^19.0.0",
+    "react": "^18.2.0",
     "zod": "^3.24.1"
   },
   "devDependencies": {
-    "@types/react": "^19.0.7",
-    "eslint": "^9.18.0",
+    "@types/react": "^18.2.25",
+    "eslint": "^8.50.0",
     "tsup": "^8.3.5",
-    "typescript": "^5.7.3"
+    "typescript": "^5.2.2"
   },
   "peerDependencies": {
     "@eco/database": "workspace:*",
     "@eco/shared": "workspace:*",
-    "react": "^18.2.0"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   }
 }

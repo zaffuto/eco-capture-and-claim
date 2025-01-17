@@ -19,18 +19,14 @@ export function AppBridgeProvider({ children, host, apiKey }: AppBridgeProviderP
     [host, apiKey]
   );
 
-  return (
-    <Provider config={config}>
-      {children}
-    </Provider>
-  );
+  return <Provider config={config}>{children}</Provider>;
 }
 
 // Utility function to get session token
 export async function getShopifySessionToken(app: ClientApplication) {
   try {
-    const sessionToken = await getSessionToken(app);
-    return sessionToken;
+    const token = await getSessionToken(app);
+    return token;
   } catch (error) {
     console.error('Error getting session token:', error);
     throw error;
