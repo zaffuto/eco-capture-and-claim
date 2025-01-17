@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState, useEffect } from 'react';
 import { supabase } from '@eco/database';
 import { DiscountService } from '@eco/shopify';
@@ -9,14 +11,21 @@ import {
   TextField,
   Select,
   DatePicker,
-  Stack,
   DataTable,
   Banner,
   Spinner,
+  BlockStack,
+  InlineStack,
+  Box,
 } from '@shopify/polaris';
-import { useAuth } from '@/contexts/AuthContext';
+import { useAuth } from '@eco/shared';
 
-const discountService = new DiscountService();
+const discountService = DiscountService.getInstance();
+
+interface DateRange {
+  start: Date;
+  end: Date;
+}
 
 export const EcoCuponManager: React.FC = () => {
   const { user, session } = useAuth();
@@ -140,10 +149,12 @@ export const EcoCuponManager: React.FC = () => {
 
   if (!session) {
     return (
-      <Card sectioned>
-        <Banner status="warning">
-          <p>Please sign in to manage cupons</p>
-        </Banner>
+      <Card>
+        <BlockStack>
+          <Banner tone="warning">
+            <p>Please sign in to manage cupons</p>
+          </Banner>
+        </BlockStack>
       </Card>
     );
   }
@@ -165,34 +176,36 @@ export const EcoCuponManager: React.FC = () => {
   return (
     <div>
       {error && (
-        <Banner status="critical" onDismiss={() => setError('')}>
+        <Banner tone="critical" onDismiss={() => setError('')}>
           <p>{error}</p>
         </Banner>
       )}
 
-      <Card sectioned>
-        <Stack distribution="equalSpacing">
-          <Text variant="headingLg">Eco Cupones</Text>
-          <Button 
-            primary 
-            onClick={() => setIsModalOpen(true)}
-            disabled={loading}
-          >
-            Crear Cupón
-          </Button>
-        </Stack>
+      <Card>
+        <BlockStack>
+          <InlineStack align="space-between">
+            <Text as="h2" variant="headingLg">Eco Cupones</Text>
+            <Button 
+              variant="primary" 
+              onClick={() => setIsModalOpen(true)}
+              disabled={loading}
+            >
+              Crear Cupón
+            </Button>
+          </InlineStack>
 
-        {loading ? (
-          <div className="flex justify-center p-4">
-            <Spinner accessibilityLabel="Loading cupons" size="large" />
-          </div>
-        ) : (
-          <DataTable
-            columnContentTypes={['text', 'text', 'text', 'numeric', 'text', 'text']}
-            headings={['Código', 'Descuento', 'Mínimo de compra', 'Usos', 'Estado', 'Acciones']}
-            rows={rows}
-          />
-        )}
+          {loading ? (
+            <div className="flex justify-center p-4">
+              <Spinner accessibilityLabel="Loading cupons" size="large" />
+            </div>
+          ) : (
+            <DataTable
+              columnContentTypes={['text', 'text', 'text', 'numeric', 'text', 'text']}
+              headings={['Código', 'Descuento', 'Mínimo de compra', 'Usos', 'Estado', 'Acciones']}
+              rows={rows}
+            />
+          )}
+        </BlockStack>
       </Card>
 
       <Modal
@@ -212,7 +225,7 @@ export const EcoCuponManager: React.FC = () => {
         ]}
       >
         <Modal.Section>
-          <Stack vertical>
+          <BlockStack>
             <TextField
               label="Código"
               value={formData.code}
@@ -237,6 +250,7 @@ export const EcoCuponManager: React.FC = () => {
               value={formData.discountValue}
               onChange={(value) => setFormData({ ...formData, discountValue: value })}
               type="number"
+              autoComplete="off"
               disabled={loading}
             />
 
@@ -245,6 +259,7 @@ export const EcoCuponManager: React.FC = () => {
               value={formData.minPurchaseAmount}
               onChange={(value) => setFormData({ ...formData, minPurchaseAmount: value })}
               type="number"
+              autoComplete="off"
               disabled={loading}
             />
 
@@ -253,27 +268,56 @@ export const EcoCuponManager: React.FC = () => {
               value={formData.usageLimit}
               onChange={(value) => setFormData({ ...formData, usageLimit: value })}
               type="number"
+              autoComplete="off"
               disabled={loading}
             />
 
-            <DatePicker
-              month={formData.startDate.getMonth()}
-              year={formData.startDate.getFullYear()}
-              onChange={(date) => setFormData({ ...formData, startDate: date })}
-              selected={formData.startDate}
-              label="Fecha de inicio"
-              disabled={loading}
-            />
+            <Box>
+              <Text as="p" variant="bodyMd">Fecha de inicio</Text>
+              <DatePicker
+                month={formData.startDate.getMonth()}
+                year={formData.startDate.getFullYear()}
+                onMonthChange={(month, year) => {
+                  const newDate = new Date(formData.startDate);
+                  newDate.setMonth(month);
+                  newDate.setFullYear(year);
+                  setFormData({ ...formData, startDate: newDate });
+                }}
+                selected={{
+                  start: formData.startDate,
+                  end: formData.startDate
+                }}
+                onChange={(range) => {
+                  if (range.start) {
+                    setFormData({ ...formData, startDate: range.start });
+                  }
+                }}
+              />
+            </Box>
 
-            <DatePicker
-              month={formData.expiryDate.getMonth()}
-              year={formData.expiryDate.getFullYear()}
-              onChange={(date) => setFormData({ ...formData, expiryDate: date })}
-              selected={formData.expiryDate}
-              label="Fecha de expiración"
-              disabled={loading}
-            />
-          </Stack>
+            <Box>
+              <Text as="p" variant="bodyMd">Fecha de expiración</Text>
+              <DatePicker
+                month={formData.expiryDate.getMonth()}
+                year={formData.expiryDate.getFullYear()}
+                onMonthChange={(month, year) => {
+                  const newDate = new Date(formData.expiryDate);
+                  newDate.setMonth(month);
+                  newDate.setFullYear(year);
+                  setFormData({ ...formData, expiryDate: newDate });
+                }}
+                selected={{
+                  start: formData.expiryDate,
+                  end: formData.expiryDate
+                }}
+                onChange={(range) => {
+                  if (range.start) {
+                    setFormData({ ...formData, expiryDate: range.start });
+                  }
+                }}
+              />
+            </Box>
+          </BlockStack>
         </Modal.Section>
       </Modal>
     </div>

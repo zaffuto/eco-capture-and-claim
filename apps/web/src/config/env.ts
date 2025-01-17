@@ -3,7 +3,7 @@ import { z } from 'zod';
 const envSchema = z.object({
   SUPABASE_URL: z.string().url(),
   SUPABASE_ANON_KEY: z.string().min(1),
-  APP_URL: z.string().url(),
+  APP_URL: z.string().url().optional(),
   FIREBASE_API_KEY: z.string().optional(),
   FIREBASE_AUTH_DOMAIN: z.string().optional(),
   FIREBASE_PROJECT_ID: z.string().optional(),
@@ -32,16 +32,6 @@ const processEnv = {
   SHOPIFY_SHOP_NAME: process.env.SHOPIFY_SHOP_NAME,
   SHOPIFY_ACCESS_TOKEN: process.env.SHOPIFY_ACCESS_TOKEN,
   MONDAY_API_TOKEN: process.env.MONDAY_API_TOKEN,
-};
+} as const;
 
-const parsed = envSchema.safeParse(processEnv);
-
-if (!parsed.success) {
-  console.error(
-    '❌ Invalid environment variables:',
-    JSON.stringify(parsed.error.format(), null, 2)
-  );
-  throw new Error('Invalid environment variables');
-}
-
-export const ENV = parsed.data;
+export const ENV = envSchema.parse(processEnv);

@@ -3,10 +3,11 @@ import {
   Card,
   ResourceList,
   ResourceItem,
-  TextStyle,
+  Text,
   Badge,
   Button,
-  Stack,
+  Box,
+  InlineStack,
 } from '@shopify/polaris';
 import { useShopifyAuth } from '../hooks/useShopifyAuth';
 
@@ -32,31 +33,31 @@ export function RecyclingProductList() {
 
   const renderItem = (item: RecyclingProduct) => {
     const { id, title, certificateId, status, recyclingDate } = item;
-    const statusMap = {
-      active: { label: 'Activo', status: 'success' },
-      used: { label: 'Usado', status: 'warning' },
-      expired: { label: 'Expirado', status: 'critical' },
+    const statusMap: Record<RecyclingProduct['status'], { label: string; tone: 'success' | 'warning' | 'critical' }> = {
+      active: { label: 'Activo', tone: 'success' },
+      used: { label: 'Usado', tone: 'warning' },
+      expired: { label: 'Expirado', tone: 'critical' },
     };
 
     return (
-      <ResourceItem id={id}>
-        <Stack>
-          <Stack.Item fill>
-            <h3>
-              <TextStyle variation="strong">{title}</TextStyle>
-            </h3>
+      <ResourceItem id={id} onClick={() => {}}>
+        <Box>
+          <Box>
+            <Text variant="headingMd" as="h3">
+              {title}
+            </Text>
             <div>Certificado: {certificateId}</div>
             <div>Fecha de reciclaje: {new Date(recyclingDate).toLocaleDateString()}</div>
-          </Stack.Item>
-          <Stack.Item>
-            <Badge status={statusMap[status].status as any}>
+          </Box>
+          <InlineStack align="end">
+            <Badge tone={statusMap[status].tone}>
               {statusMap[status].label}
             </Badge>
-          </Stack.Item>
-          <Stack.Item>
-            <Button primary>Ver detalles</Button>
-          </Stack.Item>
-        </Stack>
+            <Button variant="primary" onClick={() => {}}>
+              Ver detalles
+            </Button>
+          </InlineStack>
+        </Box>
       </ResourceItem>
     );
   };
@@ -66,15 +67,11 @@ export function RecyclingProductList() {
   }
 
   return (
-    <Card title="Productos Reciclados">
+    <Card>
       <ResourceList
         items={products}
         renderItem={renderItem}
-        emptyState={
-          <div>
-            <p>No hay productos reciclados para mostrar</p>
-          </div>
-        }
+        emptyState={<div>No hay productos de reciclaje</div>}
       />
     </Card>
   );

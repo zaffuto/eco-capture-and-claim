@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { Provider } from '@shopify/app-bridge-react';
-import { AppConfig } from '@shopify/app-bridge';
+import { createApp, ClientApplication } from '@shopify/app-bridge';
 import { getSessionToken } from "@shopify/app-bridge-utils";
 
 interface AppBridgeProviderProps {
@@ -27,7 +27,7 @@ export function AppBridgeProvider({ children, host, apiKey }: AppBridgeProviderP
 }
 
 // Utility function to get session token
-export async function getShopifySessionToken(app: AppConfig) {
+export async function getShopifySessionToken(app: ClientApplication) {
   try {
     const sessionToken = await getSessionToken(app);
     return sessionToken;

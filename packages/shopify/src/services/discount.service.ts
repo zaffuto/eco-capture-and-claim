@@ -1,5 +1,5 @@
 import { supabase } from '@eco/database';
-import { createClient } from '@shopify/shopify-api';
+import { Session, shopifyApi, ApiVersion } from '@shopify/shopify-api';
 import { config } from '../config';
 import { z } from 'zod';
 
@@ -25,12 +25,13 @@ export class DiscountService {
       throw new Error('Missing required Shopify configuration');
     }
 
-    this.shopify = createClient({
+    this.shopify = shopifyApi({
       apiKey: config.SHOPIFY_API_KEY,
       apiSecretKey: config.SHOPIFY_API_SECRET,
       scopes: ['write_discounts'],
       hostName: config.SHOPIFY_SHOP_NAME,
-      accessToken: config.SHOPIFY_ACCESS_TOKEN,
+      isEmbeddedApp: true,
+      apiVersion: ApiVersion.January24,
     });
   }
 
@@ -51,59 +52,65 @@ export class DiscountService {
         throw new Error('La fecha de expiración debe ser posterior a la fecha de inicio');
       }
 
-      if (data.startDate < new Date()) {
-        throw new Error('La fecha de inicio no puede ser en el pasado');
-      }
-
-      // Crear Price Rule en Shopify
-      const priceRule = await this.shopify.priceRule.create({
-        title: `Eco Cupon - ${data.code}`,
-        target_type: 'line_item',
-        target_selection: 'all',
-        allocation_method: data.discountType === 'percentage' ? 'across' : 'each',
-        value_type: data.discountType === 'percentage' ? 'percentage' : 'fixed_amount',
-        value: `-${data.discountValue}`,
-        customer_selection: 'all',
-        starts_at: data.startDate.toISOString(),
-        ends_at: data.expiryDate.toISOString(),
-        usage_limit: data.usageLimit,
-        once_per_customer: true,
-        prerequisite_subtotal_range: data.minPurchaseAmount ? {
-          greater_than_or_equal_to: data.minPurchaseAmount.toString()
-        } : undefined,
+      // Crear descuento en Shopify
+      const client = new this.shopify.clients.Rest({
+        session: new Session({
+          id: '',
+          shop: config.SHOPIFY_SHOP_NAME,
+          state: '',
+          isOnline: true,
+          accessToken: config.SHOPIFY_ACCESS_TOKEN,
+        }),
       });
 
-      // Crear Discount Code en Shopify
-      const discountCode = await this.shopify.discountCode.create(priceRule.id, {
-        code: data.code,
+      const discount = await client.post({
+        path: 'price_rules',
+        data: {
+          price_rule: {
+            title: `EcoCupon - ${data.code}`,
+            target_type: 'line_item',
+            target_selection: 'all',
+            allocation_method: 'across',
+            value_type: data.discountType === 'percentage' ? 'percentage' : 'fixed_amount',
+            value: -data.discountValue,
+            customer_selection: 'all',
+            starts_at: data.startDate.toISOString(),
+            ends_at: data.expiryDate.toISOString(),
+            usage_limit: data.usageLimit,
+            prerequisite_subtotal_range: data.minPurchaseAmount
+              ? { greater_than_or_equal_to: data.minPurchaseAmount }
+              : undefined,
+          },
+        },
       });
 
-      // Guardar en Supabase con prepared statement
+      // Crear cupón en la base de datos
       const { data: cupon, error } = await supabase
-        .from('eco_cupons')
-        .insert({
-          code: data.code,
-          discount_type: data.discountType,
-          discount_value: data.discountValue,
-          min_purchase_amount: data.minPurchaseAmount,
-          max_discount_amount: data.maxDiscountAmount,
-          start_date: data.startDate.toISOString(),
-          expiry_date: data.expiryDate.toISOString(),
-          usage_limit: data.usageLimit,
-          shopify_price_rule_id: priceRule.id,
-          shopify_discount_code_id: discountCode.id,
-          user_id: data.userId,
-          status: 'active'
-        })
+        .from('ecocupons')
+        .insert([
+          {
+            code: data.code,
+            discount_type: data.discountType,
+            discount_value: data.discountValue,
+            min_purchase_amount: data.minPurchaseAmount,
+            max_discount_amount: data.maxDiscountAmount,
+            start_date: data.startDate.toISOString(),
+            expiry_date: data.expiryDate.toISOString(),
+            usage_limit: data.usageLimit,
+            user_id: data.userId,
+            shopify_price_rule_id: discount.body.price_rule.id,
+          },
+        ])
         .select()
         .single();
 
-      if (error) throw error;
+      if (error) {
+        throw error;
+      }
 
       return cupon;
-
     } catch (error) {
-      console.error('Error creating eco cupon:', error);
+      console.error('Error creating EcoCupon:', error);
       throw error;
     }
   }
@@ -116,9 +123,9 @@ export class DiscountService {
         return { valid: false, message: 'Código inválido' };
       }
 
-      // Verificar en Supabase usando prepared statement
+      // Verificar en Supabase
       const { data: cupon, error } = await supabase
-        .from('eco_cupons')
+        .from('ecocupons')
         .select('*')
         .eq('code', sanitizedCode)
         .eq('status', 'active')
@@ -155,7 +162,7 @@ export class DiscountService {
       }
 
       const { data: cupon, error } = await supabase
-        .from('eco_cupons')
+        .from('ecocupons')
         .update({ status: 'inactive' })
         .eq('id', cuponId)
         .select()
@@ -165,8 +172,23 @@ export class DiscountService {
 
       // Desactivar en Shopify
       if (cupon.shopify_price_rule_id) {
-        await this.shopify.priceRule.update(cupon.shopify_price_rule_id, {
-          status: 'disabled'
+        const client = new this.shopify.clients.Rest({
+          session: new Session({
+            id: '',
+            shop: config.SHOPIFY_SHOP_NAME,
+            state: '',
+            isOnline: true,
+            accessToken: config.SHOPIFY_ACCESS_TOKEN,
+          }),
+        });
+
+        await client.put({
+          path: `price_rules/${cupon.shopify_price_rule_id}`,
+          data: {
+            price_rule: {
+              status: 'disabled'
+            }
+          }
         });
       }
 
@@ -187,8 +209,8 @@ export class DiscountService {
       }
 
       const { data: cupon, error } = await supabase
-        .from('eco_cupons')
-        .update({ times_used: sql`times_used + 1` })
+        .from('ecocupons')
+        .update({ times_used: { increment: 1 } })
         .eq('code', sanitizedCode)
         .select()
         .single();
@@ -204,6 +226,80 @@ export class DiscountService {
 
     } catch (error) {
       console.error('Error incrementing cupon usage:', error);
+      throw error;
+    }
+  }
+
+  async getEcoCupons(userId: string) {
+    try {
+      const { data: cupons, error } = await supabase
+        .from('ecocupons')
+        .select('*')
+        .eq('user_id', userId)
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        throw error;
+      }
+
+      return cupons;
+    } catch (error) {
+      console.error('Error getting EcoCupons:', error);
+      throw error;
+    }
+  }
+
+  async getEcoCupon(code: string) {
+    try {
+      const { data: cupon, error } = await supabase
+        .from('ecocupons')
+        .select('*')
+        .eq('code', code)
+        .single();
+
+      if (error) {
+        throw error;
+      }
+
+      return cupon;
+    } catch (error) {
+      console.error('Error getting EcoCupon:', error);
+      throw error;
+    }
+  }
+
+  async updateEcoCupon(code: string, updates: Partial<z.infer<typeof createEcoCuponSchema>>) {
+    try {
+      const { data: cupon, error } = await supabase
+        .from('ecocupons')
+        .update(updates)
+        .eq('code', code)
+        .select()
+        .single();
+
+      if (error) {
+        throw error;
+      }
+
+      return cupon;
+    } catch (error) {
+      console.error('Error updating EcoCupon:', error);
+      throw error;
+    }
+  }
+
+  async deleteEcoCupon(code: string) {
+    try {
+      const { error } = await supabase
+        .from('ecocupons')
+        .delete()
+        .eq('code', code);
+
+      if (error) {
+        throw error;
+      }
+    } catch (error) {
+      console.error('Error deleting EcoCupon:', error);
       throw error;
     }
   }

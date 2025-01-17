@@ -13,18 +13,19 @@
   },
   "dependencies": {
     "@eco/shared": "workspace:*",
-    "react": "^18.2.0",
-    "react-native": "0.72.0",
     "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^2.0.18",
+    "@shopify/polaris": "12.27.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
+    "react": "^18.2.0",
+    "react-native": "0.72.0",
     "tailwind-merge": "^1.14.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.25",
-    "typescript": "^5.2.2",
+    "eslint": "^8.50.0",
     "tsup": "^7.2.0",
-    "eslint": "^8.50.0"
+    "typescript": "^5.2.2"
   }
 }
