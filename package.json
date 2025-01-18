@@ -16,7 +16,8 @@
     "clean": "turbo run clean && rm -rf node_modules",
     "dev:web": "npm run dev --workspace=apps/web",
     "dev:mobile": "npm run dev --workspace=apps/mobile",
-    "test": "npm run test --workspaces"
+    "test": "npm run test --workspaces",
+    "vercel-build": "pnpm install --frozen-lockfile && pnpm build"
   },
   "devDependencies": {
     "@types/node": "^20.17.14",
@@ -30,7 +31,7 @@
     "typescript": "^5.2.2"
   },
   "engines": {
-    "node": ">=20.10.0 <21.0.0",
+    "node": "20.x",
     "npm": ">=11.0.0"
   },
   "dependencies": {
