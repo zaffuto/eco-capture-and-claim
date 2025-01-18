@@ -10,4 +10,5 @@ export const supabase = createClient(
   config.SUPABASE_ANON_KEY
 );
 
-export * from './types';
+export * from './supabase';
+export * from './config';

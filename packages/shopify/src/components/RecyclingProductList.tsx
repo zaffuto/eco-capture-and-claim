@@ -1,55 +1,76 @@
-import React from 'react';
-// import {
-//   Card,
-//   ResourceList,
-//   ResourceItem,
-//   Text,
-//   Badge,
-//   Button,
-//   Box,
-//   InlineStack,
-// } from '@shopify/polaris';
+import { useEffect, useState } from 'react';
+import { Card, Layout, Page, Text } from '@shopify/polaris';
 import { useShopifyAuth } from '../hooks/useShopifyAuth';
 
 interface RecyclingProduct {
   id: string;
   title: string;
-  certificateId: string;
-  status: 'active' | 'used' | 'expired';
-  recyclingDate: string;
+  description: string;
+  status: 'pending' | 'approved' | 'rejected';
 }
 
 export function RecyclingProductList() {
-  // const { isAuthenticated } = useShopifyAuth();
+  const { sessionToken, isLoading } = useShopifyAuth();
+  const [products, setProducts] = useState<RecyclingProduct[]>([]);
 
-  // if (!isAuthenticated) {
-  //   return <div>Cargando...</div>;
-  // }
+  useEffect(() => {
+    // TODO: Implement product fetching when we have a valid session
+    if (sessionToken) {
+      setProducts([]);
+    }
+  }, [sessionToken]);
 
-  // Simple structure for V1.0
+  if (isLoading) {
+    return (
+      <Page>
+        <Layout>
+          <Layout.Section>
+            <Card>
+              <Text variant="bodyMd" as="p">
+                Loading...
+              </Text>
+            </Card>
+          </Layout.Section>
+        </Layout>
+      </Page>
+    );
+  }
+
+  if (!products.length) {
+    return (
+      <Page>
+        <Layout>
+          <Layout.Section>
+            <Card>
+              <Text variant="bodyMd" as="p">
+                No recycling products found.
+              </Text>
+            </Card>
+          </Layout.Section>
+        </Layout>
+      </Page>
+    );
+  }
+
   return (
-    <div>
-      <div>Producto de Reciclaje</div>
-      <img src="https://via.placeholder.com/150" alt="Producto de Reciclaje" />
-      <div>Detalles del producto aquí</div>
-    </div>
+    <Page>
+      <Layout>
+        <Layout.Section>
+          {products.map((product) => (
+            <Card key={product.id}>
+              <Text variant="headingMd" as="h2">
+                {product.title}
+              </Text>
+              <Text variant="bodyMd" as="p">
+                {product.description}
+              </Text>
+              <Text variant="bodyMd" as="p">
+                Status: {product.status}
+              </Text>
+            </Card>
+          ))}
+        </Layout.Section>
+      </Layout>
+    </Page>
   );
 }
-
-// Commented out problematic JSX
-// const renderItem = (item: RecyclingProduct) => {
-//   const { id, title, certificateId, status, recyclingDate } = item;
-//   return (
-//     <div>
-//       <div>
-//         <div>{title}</div>
-//         <div>Certificado: {certificateId}</div>
-//         <div>Fecha de reciclaje: {new Date(recyclingDate).toLocaleDateString()}</div>
-//       </div>
-//       <div>
-//         <div>{statusMap[status].label}</div>
-//         <div>Ver detalles</div>
-//       </div>
-//     </div>
-//   );
-// }

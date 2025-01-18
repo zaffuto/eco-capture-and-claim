@@ -1,37 +1,76 @@
-import { supabase } from '@eco/database';
 import { Session, shopifyApi, ApiVersion } from '@shopify/shopify-api';
+import { getSessionToken } from '@shopify/app-bridge-utils';
+import type { ClientApplication } from '@shopify/app-bridge';
 import { config } from '../config';
 import { z } from 'zod';
+import { supabase } from '@eco/database';
 
 // Validación de entrada
 const createEcoCuponSchema = z.object({
-  code: z.string().min(3).max(50).regex(/^[A-Z0-9-_]+$/),
-  discountType: z.enum(['percentage', 'fixed_amount']),
-  discountValue: z.number().positive().max(100),
-  minPurchaseAmount: z.number().positive().optional(),
-  maxDiscountAmount: z.number().positive().optional(),
-  startDate: z.date(),
-  expiryDate: z.date(),
-  usageLimit: z.number().int().positive().optional(),
+  name: z.string().min(1),
+  code: z.string().min(1),
+  value: z.number().min(0).max(100),
+  startDate: z.string().datetime(),
+  endDate: z.string().datetime().optional(),
+  maxUses: z.number().min(1),
   userId: z.string().uuid(),
 });
+
+interface DiscountNode {
+  id: string;
+  title: string;
+  startsAt: string;
+  endsAt: string | null;
+  status: string;
+  discountCode: {
+    code: string;
+  };
+}
+
+interface DiscountConnection {
+  edges: Array<{
+    node: DiscountNode;
+  }>;
+}
+
+interface DiscountQueryResponse {
+  data: {
+    codeDiscountNodes: DiscountConnection;
+  };
+}
+
+interface CreateDiscountInput {
+  title: string;
+  code: string;
+  percentage: number;
+  startsAt: string;
+  endsAt?: string;
+}
+
+interface CreateDiscountResponse {
+  data: {
+    discountCodeBasicCreate: {
+      codeDiscountNode: DiscountNode;
+      userErrors: Array<{
+        field: string[];
+        message: string;
+      }>;
+    };
+  };
+}
 
 export class DiscountService {
   private shopify;
   private static instance: DiscountService;
 
   private constructor() {
-    if (!config.SHOPIFY_API_KEY || !config.SHOPIFY_API_SECRET || !config.SHOPIFY_ACCESS_TOKEN) {
-      throw new Error('Missing required Shopify configuration');
-    }
-
     this.shopify = shopifyApi({
       apiKey: config.SHOPIFY_API_KEY,
       apiSecretKey: config.SHOPIFY_API_SECRET,
-      scopes: ['write_discounts'],
+      scopes: ['write_discounts', 'read_discounts'],
       hostName: config.SHOPIFY_SHOP_NAME,
+      apiVersion: ApiVersion.January23,
       isEmbeddedApp: true,
-      apiVersion: ApiVersion.January24,
     });
   }
 
@@ -42,75 +81,128 @@ export class DiscountService {
     return DiscountService.instance;
   }
 
-  async createEcoCupon(input: z.infer<typeof createEcoCuponSchema>) {
+  async createEcoCupon(input: z.infer<typeof createEcoCuponSchema>, session: Session) {
     try {
-      // Validar entrada
-      const data = createEcoCuponSchema.parse(input);
+      const validatedInput = createEcoCuponSchema.parse(input);
+      const client = new this.shopify.clients.Graphql({ session });
 
-      // Validar fechas
-      if (data.expiryDate <= data.startDate) {
-        throw new Error('La fecha de expiración debe ser posterior a la fecha de inicio');
-      }
-
-      // Crear descuento en Shopify
-      const client = new this.shopify.clients.Rest({
-        session: new Session({
-          id: '',
-          shop: config.SHOPIFY_SHOP_NAME,
-          state: '',
-          isOnline: true,
-          accessToken: config.SHOPIFY_ACCESS_TOKEN,
-        }),
-      });
-
-      const discount = await client.post({
-        path: 'price_rules',
+      const response = await client.query({
         data: {
-          price_rule: {
-            title: `EcoCupon - ${data.code}`,
-            target_type: 'line_item',
-            target_selection: 'all',
-            allocation_method: 'across',
-            value_type: data.discountType === 'percentage' ? 'percentage' : 'fixed_amount',
-            value: -data.discountValue,
-            customer_selection: 'all',
-            starts_at: data.startDate.toISOString(),
-            ends_at: data.expiryDate.toISOString(),
-            usage_limit: data.usageLimit,
-            prerequisite_subtotal_range: data.minPurchaseAmount
-              ? { greater_than_or_equal_to: data.minPurchaseAmount }
-              : undefined,
+          query: `
+            mutation discountCodeBasicCreate($input: DiscountCodeBasicInput!) {
+              discountCodeBasicCreate(codeDiscount: $input) {
+                codeDiscountNode {
+                  id
+                  codeDiscount {
+                    ... on DiscountCodeBasic {
+                      title
+                      codes(first: 1) {
+                        nodes {
+                          code
+                        }
+                      }
+                      startsAt
+                      endsAt
+                      customerSelection {
+                        ... on DiscountCustomerAll {
+                          allCustomers
+                        }
+                      }
+                      customerGets {
+                        value {
+                          ... on DiscountPercentage {
+                            percentage
+                          }
+                        }
+                        items {
+                          ... on AllDiscountItems {
+                            allItems
+                          }
+                        }
+                      }
+                      appliesOncePerCustomer
+                    }
+                  }
+                  userErrors {
+                    field
+                    code
+                    message
+                  }
+                }
+              }
+            }
+          `,
+          variables: {
+            input: {
+              title: validatedInput.name,
+              code: validatedInput.code,
+              startsAt: validatedInput.startDate,
+              endsAt: validatedInput.endDate,
+              customerSelection: {
+                all: true,
+              },
+              customerGets: {
+                value: {
+                  percentage: validatedInput.value,
+                },
+                items: {
+                  all: true,
+                },
+              },
+              appliesOncePerCustomer: true,
+            },
           },
         },
       });
 
-      // Crear cupón en la base de datos
-      const { data: cupon, error } = await supabase
-        .from('ecocupons')
-        .insert([
-          {
-            code: data.code,
-            discount_type: data.discountType,
-            discount_value: data.discountValue,
-            min_purchase_amount: data.minPurchaseAmount,
-            max_discount_amount: data.maxDiscountAmount,
-            start_date: data.startDate.toISOString(),
-            expiry_date: data.expiryDate.toISOString(),
-            usage_limit: data.usageLimit,
-            user_id: data.userId,
-            shopify_price_rule_id: discount.body.price_rule.id,
-          },
-        ])
-        .select()
-        .single();
+      const discount = response as unknown as {
+        body: {
+          data: {
+            discountCodeBasicCreate: {
+              codeDiscountNode: {
+                id: string;
+                codeDiscount: {
+                  title: string;
+                  codes: {
+                    nodes: Array<{
+                      code: string;
+                    }>;
+                  };
+                  startsAt: string;
+                  endsAt: string | null;
+                  customerSelection: {
+                    allCustomers: boolean;
+                  };
+                  customerGets: {
+                    value: {
+                      percentage: number;
+                    };
+                    items: {
+                      allItems: boolean;
+                    };
+                  };
+                  appliesOncePerCustomer: boolean;
+                };
+              };
+              userErrors: Array<{
+                field: string[];
+                code: string;
+                message: string;
+              }>;
+            };
+          };
+        };
+      };
 
-      if (error) {
-        throw error;
+      if (discount.body.data.discountCodeBasicCreate.userErrors.length > 0) {
+        throw new Error(
+          discount.body.data.discountCodeBasicCreate.userErrors[0].message,
+        );
       }
 
-      return cupon;
+      return discount.body.data.discountCodeBasicCreate.codeDiscountNode;
     } catch (error) {
-      console.error('Error creating EcoCupon:', error);
+      console.error('Error creating discount:', error);
       throw error;
     }
   }
@@ -302,5 +394,112 @@ export class DiscountService {
       console.error('Error deleting EcoCupon:', error);
       throw error;
     }
+  }
+}
+
+export async function getDiscounts(app: ClientApplication): Promise<DiscountNode[]> {
+  try {
+    const sessionToken = await getSessionToken(app);
+    const response = await fetch('/api/graphql', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Shopify-Access-Token': sessionToken,
+        'X-Shopify-Api-Version': ApiVersion.January23,
+      },
+      body: JSON.stringify({
+        query: `
+          query GetDiscounts {
+            codeDiscountNodes(first: 10) {
+              edges {
+                node {
+                  id
+                  title
+                  startsAt
+                  endsAt
+                  status
+                  discountCode {
+                    code
+                  }
+                }
+              }
+            }
+          }
+        `,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch discounts');
+    }
+
+    const data = (await response.json()) as DiscountQueryResponse;
+    return data.data.codeDiscountNodes.edges.map((edge) => edge.node);
+  } catch (error) {
+    console.error('Error fetching discounts:', error);
+    throw error;
+  }
+}
+
+export async function createDiscount(
+  app: ClientApplication,
+  input: CreateDiscountInput
+): Promise<DiscountNode> {
+  try {
+    const sessionToken = await getSessionToken(app);
+    const response = await fetch('/api/graphql', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Shopify-Access-Token': sessionToken,
+        'X-Shopify-Api-Version': ApiVersion.January23,
+      },
+      body: JSON.stringify({
+        query: `
+          mutation CreateDiscount($input: DiscountCodeBasicInput!) {
+            discountCodeBasicCreate(codeDiscount: $input) {
+              codeDiscountNode {
+                id
+                title
+                startsAt
+                endsAt
+                status
+                discountCode {
+                  code
+                }
+              }
+              userErrors {
+                field
+                message
+              }
+            }
+          }
+        `,
+        variables: {
+          input: {
+            title: input.title,
+            code: input.code,
+            startsAt: input.startsAt,
+            endsAt: input.endsAt,
+            percentage: input.percentage,
+          },
+        },
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to create discount');
+    }
+
+    const data = await response.json() as CreateDiscountResponse;
+    
+    if (data.data.discountCodeBasicCreate.userErrors.length > 0) {
+      throw new Error(data.data.discountCodeBasicCreate.userErrors[0].message);
+    }
+
+    return data.data.discountCodeBasicCreate.codeDiscountNode;
+  } catch (error) {
+    console.error('Error creating discount:', error);
+    throw error;
   }
 }

@@ -1,0 +1,158 @@
+2025-01-18T20:23:51.527253Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(".turbo/cookies/.turbo-cookie"), AnchoredSystemPathBuf(".turbo/cookies/1.cookie")}
+2025-01-18T20:23:51.527405Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-01-18T20:23:52.026886Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(".turbo/cookies/3.cookie"), AnchoredSystemPathBuf(".turbo/cookies/2.cookie")}
+2025-01-18T20:23:52.026906Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-01-18T20:24:07.638808Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("package.json")}
+2025-01-18T20:24:07.638849Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(All)
+2025-01-18T20:24:17.828401Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("_tmp_22712_24f5adf019f11a951bd18de1a05571d7"), AnchoredSystemPathBuf("")}
+2025-01-18T20:24:17.828541Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-01-18T20:24:28.827955Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(".turbo/cookies/4.cookie")}
+2025-01-18T20:24:28.827983Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-01-18T20:24:29.353278Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(".turbo/cookies/6.cookie"), AnchoredSystemPathBuf(".turbo/cookies/5.cookie")}
+2025-01-18T20:24:29.353316Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-01-18T20:24:36.528750Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/shopify/tsup.config.bundled_8f4pktjid2.mjs")}
+2025-01-18T20:24:36.528820Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@eco/shopify"), path: AnchoredSystemPathBuf("packages/shopify") }}))
+2025-01-18T20:24:42.727749Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(".turbo/cookies/8.cookie"), AnchoredSystemPathBuf(".turbo/cookies/7.cookie"), AnchoredSystemPathBuf(".turbo/cookies/9.cookie")}
+2025-01-18T20:24:42.727771Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-01-18T20:24:46.727526Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/ui/tsup.config.bundled_ubn0fw7uxu.mjs")}
+2025-01-18T20:24:46.727547Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@eco/ui"), path: AnchoredSystemPathBuf("packages/ui") }}))
+2025-01-18T20:24:46.828220Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/ui/tsup.config.bundled_ubn0fw7uxu.mjs")}
+2025-01-18T20:24:46.828244Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@eco/ui"), path: AnchoredSystemPathBuf("packages/ui") }}))
+2025-01-18T20:25:01.529192Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/shopify/src/providers/PolarisProvider.tsx")}
+2025-01-18T20:25:01.532549Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@eco/shopify"), path: AnchoredSystemPathBuf("packages/shopify") }}))
+2025-01-18T20:26:01.731578Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(""), AnchoredSystemPathBuf("_tmp_23131_18141eb5a2e9b7d6686c169aa3feeed9")}
+2025-01-18T20:26:01.731660Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-01-18T20:26:14.628766Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(".turbo/cookies/10.cookie")}
+2025-01-18T20:26:14.628785Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-01-18T20:26:14.929674Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(".turbo/cookies/12.cookie"), AnchoredSystemPathBuf(".turbo/cookies/11.cookie")}
+2025-01-18T20:26:14.929713Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-01-18T20:26:15.028911Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/shared/.turbo")}
+2025-01-18T20:26:15.028930Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@eco/shared"), path: AnchoredSystemPathBuf("packages/shared") }}))
+2025-01-18T20:26:15.162626Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(".turbo/cookies/13.cookie"), AnchoredSystemPathBuf(".turbo/cookies/14.cookie"), AnchoredSystemPathBuf(".turbo/cookies/15.cookie")}
+2025-01-18T20:26:15.162645Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-01-18T20:26:18.930905Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/shopify/tsup.config.bundled_qiafuyztc0i.mjs")}
+2025-01-18T20:26:18.930959Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@eco/shopify"), path: AnchoredSystemPathBuf("packages/shopify") }}))
+2025-01-18T20:26:18.993906Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2025-01-18T20:26:19.229362Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/ui/tsup.config.bundled_7kmvg9p4ufw.mjs")}
+2025-01-18T20:26:19.229420Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@eco/ui"), path: AnchoredSystemPathBuf("packages/ui") }}))
+2025-01-18T20:26:19.529127Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/ui/tsup.config.bundled_7kmvg9p4ufw.mjs")}
+2025-01-18T20:26:19.529143Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@eco/ui"), path: AnchoredSystemPathBuf("packages/ui") }}))
+2025-01-18T20:26:51.029074Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/shopify/src/components/RecyclingProductList.tsx")}
+2025-01-18T20:26:51.029278Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@eco/shopify"), path: AnchoredSystemPathBuf("packages/shopify") }}))
+2025-01-18T20:27:12.637223Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("_tmp_23570_396ccd363804cef41915b84decee43ce"), AnchoredSystemPathBuf("")}
+2025-01-18T20:27:12.637251Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-01-18T20:27:24.631022Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(".turbo/cookies/16.cookie")}
+2025-01-18T20:27:24.631083Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-01-18T20:27:25.033887Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(".turbo/cookies/17.cookie"), AnchoredSystemPathBuf(".turbo/cookies/20.cookie"), AnchoredSystemPathBuf(".turbo/cookies/18.cookie"), AnchoredSystemPathBuf(".turbo/cookies/19.cookie")}
+2025-01-18T20:27:25.033912Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-01-18T20:27:28.333116Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/shopify/tsup.config.bundled_hwf9ux6uylf.mjs")}
+2025-01-18T20:27:28.333140Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@eco/shopify"), path: AnchoredSystemPathBuf("packages/shopify") }}))
+2025-01-18T20:27:28.407201Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2025-01-18T20:27:28.430570Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/shopify/tsup.config.bundled_hwf9ux6uylf.mjs")}
+2025-01-18T20:27:28.430588Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@eco/shopify"), path: AnchoredSystemPathBuf("packages/shopify") }}))
+2025-01-18T20:27:28.430645Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2025-01-18T20:27:29.029799Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/ui/tsup.config.bundled_0kqj81e4a97k.mjs")}
+2025-01-18T20:27:29.029819Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@eco/ui"), path: AnchoredSystemPathBuf("packages/ui") }}))
+2025-01-18T20:27:29.139262Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2025-01-18T20:27:29.139485Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/ui/tsup.config.bundled_0kqj81e4a97k.mjs")}
+2025-01-18T20:27:29.139497Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@eco/ui"), path: AnchoredSystemPathBuf("packages/ui") }}))
+2025-01-18T20:27:29.139536Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2025-01-18T20:28:13.332184Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/shopify/src/components/RecyclingProductList.tsx")}
+2025-01-18T20:28:13.332297Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@eco/shopify"), path: AnchoredSystemPathBuf("packages/shopify") }}))
+2025-01-18T20:28:32.949536Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(""), AnchoredSystemPathBuf("_tmp_23969_b0f2927c15ff651c727cbfbdbdc818d1")}
+2025-01-18T20:28:32.949595Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-01-18T20:28:43.431804Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(".turbo/cookies/21.cookie")}
+2025-01-18T20:28:43.431827Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-01-18T20:28:43.935759Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(".turbo/cookies/24.cookie"), AnchoredSystemPathBuf(".turbo/cookies/23.cookie"), AnchoredSystemPathBuf(".turbo/cookies/25.cookie"), AnchoredSystemPathBuf(".turbo/cookies/22.cookie")}
+2025-01-18T20:28:43.935924Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-01-18T20:28:47.231778Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/shopify/tsup.config.bundled_m3dldjg9xao.mjs")}
+2025-01-18T20:28:47.231799Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@eco/shopify"), path: AnchoredSystemPathBuf("packages/shopify") }}))
+2025-01-18T20:28:47.327086Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2025-01-18T20:28:47.331698Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/shopify/tsup.config.bundled_m3dldjg9xao.mjs")}
+2025-01-18T20:28:47.331708Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@eco/shopify"), path: AnchoredSystemPathBuf("packages/shopify") }}))
+2025-01-18T20:28:47.331735Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2025-01-18T20:28:47.831998Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/ui/tsup.config.bundled_8998k1t8umt.mjs")}
+2025-01-18T20:28:47.832077Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@eco/ui"), path: AnchoredSystemPathBuf("packages/ui") }}))
+2025-01-18T20:28:47.931340Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/ui/tsup.config.bundled_8998k1t8umt.mjs")}
+2025-01-18T20:28:47.931361Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@eco/ui"), path: AnchoredSystemPathBuf("packages/ui") }}))
+2025-01-18T20:29:30.133038Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/shopify/src/services/discount.service.ts")}
+2025-01-18T20:29:30.133061Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@eco/shopify"), path: AnchoredSystemPathBuf("packages/shopify") }}))
+2025-01-18T23:16:37.821517Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(""), AnchoredSystemPathBuf("_tmp_27695_e624ce57bd526b4282937a76d809ba80")}
+2025-01-18T23:16:37.821601Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-01-18T23:16:48.714736Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(".turbo/cookies/26.cookie")}
+2025-01-18T23:16:48.714778Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-01-18T23:16:49.214605Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(".turbo/cookies/29.cookie"), AnchoredSystemPathBuf(".turbo/cookies/30.cookie"), AnchoredSystemPathBuf(".turbo/cookies/27.cookie"), AnchoredSystemPathBuf(".turbo/cookies/28.cookie")}
+2025-01-18T23:16:49.214625Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-01-18T23:16:52.712093Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/shopify/tsup.config.bundled_a3e5q5ejepg.mjs")}
+2025-01-18T23:16:52.712117Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@eco/shopify"), path: AnchoredSystemPathBuf("packages/shopify") }}))
+2025-01-18T23:16:52.811380Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/ui/tsup.config.bundled_uwtt4nwad9o.mjs")}
+2025-01-18T23:16:52.811401Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@eco/ui"), path: AnchoredSystemPathBuf("packages/ui") }}))
+2025-01-18T23:16:52.854574Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2025-01-18T23:16:52.912854Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/shopify/tsup.config.bundled_a3e5q5ejepg.mjs")}
+2025-01-18T23:16:52.912869Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@eco/shopify"), path: AnchoredSystemPathBuf("packages/shopify") }}))
+2025-01-18T23:17:33.112908Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/shopify/src/services/discount.service.ts")}
+2025-01-18T23:17:33.113439Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@eco/shopify"), path: AnchoredSystemPathBuf("packages/shopify") }}))
+2025-01-18T23:17:44.113255Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/ui/tsup.config.ts")}
+2025-01-18T23:17:44.113275Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@eco/ui"), path: AnchoredSystemPathBuf("packages/ui") }}))
+2025-01-18T23:17:53.815511Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/ui/package.json")}
+2025-01-18T23:17:53.815538Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@eco/ui"), path: AnchoredSystemPathBuf("packages/ui") }}))
+2025-01-18T23:18:56.246124Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("_tmp_28123_3f06326893aea1c965805a26b31f2135"), AnchoredSystemPathBuf("")}
+2025-01-18T23:18:56.246142Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-01-18T23:19:15.946894Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("pnpm-lock.yaml.919902781"), AnchoredSystemPathBuf("pnpm-lock.yaml")}
+2025-01-18T23:19:15.946912Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-01-18T23:19:21.347671Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(".turbo/cookies/31.cookie")}
+2025-01-18T23:19:21.347716Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-01-18T23:19:21.647356Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(".turbo/cookies/33.cookie"), AnchoredSystemPathBuf(".turbo/cookies/32.cookie"), AnchoredSystemPathBuf(".turbo/cookies/34.cookie")}
+2025-01-18T23:19:21.647377Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-01-18T23:19:24.147703Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/shopify/tsup.config.bundled_l7ju9ix3hk.mjs")}
+2025-01-18T23:19:24.147719Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@eco/shopify"), path: AnchoredSystemPathBuf("packages/shopify") }}))
+2025-01-18T23:19:24.147749Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2025-01-18T23:19:59.648525Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/shopify/src/services/discount.service.ts")}
+2025-01-18T23:19:59.648539Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@eco/shopify"), path: AnchoredSystemPathBuf("packages/shopify") }}))
+2025-01-18T23:20:20.050111Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(""), AnchoredSystemPathBuf("_tmp_28520_790d79a442936a942b6ff09d315c9ac2")}
+2025-01-18T23:20:20.050174Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-01-18T23:20:32.051194Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(".turbo/cookies/35.cookie")}
+2025-01-18T23:20:32.051241Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-01-18T23:20:32.550030Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(".turbo/cookies/36.cookie"), AnchoredSystemPathBuf(".turbo/cookies/37.cookie"), AnchoredSystemPathBuf(".turbo/cookies/38.cookie")}
+2025-01-18T23:20:32.550049Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-01-18T23:20:35.649632Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/shopify/tsup.config.bundled_w00e4oqjd1.mjs")}
+2025-01-18T23:20:35.649655Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@eco/shopify"), path: AnchoredSystemPathBuf("packages/shopify") }}))
+2025-01-18T23:20:35.664336Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2025-01-18T23:21:30.051247Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/shopify/src/services/discount.service.ts")}
+2025-01-18T23:21:30.051716Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@eco/shopify"), path: AnchoredSystemPathBuf("packages/shopify") }}))
+2025-01-18T23:50:23.493335Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("_tmp_29424_a0870556792a9b1b784d36a75bd38740")}
+2025-01-18T23:50:23.493374Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-01-18T23:50:23.664966Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("_tmp_29424_a0870556792a9b1b784d36a75bd38740"), AnchoredSystemPathBuf("")}
+2025-01-18T23:50:23.664988Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-01-18T23:50:55.266439Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(".turbo/cookies/39.cookie")}
+2025-01-18T23:50:55.266457Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-01-18T23:50:55.867341Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(".turbo/cookies/42.cookie"), AnchoredSystemPathBuf(".turbo/cookies/40.cookie"), AnchoredSystemPathBuf(".turbo/cookies/41.cookie")}
+2025-01-18T23:50:55.867391Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-01-18T23:51:02.969661Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/shopify/tsup.config.bundled_pltltf4cze.mjs")}
+2025-01-18T23:51:02.969724Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@eco/shopify"), path: AnchoredSystemPathBuf("packages/shopify") }}))
+2025-01-18T23:51:03.065570Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/shopify/tsup.config.bundled_pltltf4cze.mjs")}
+2025-01-18T23:51:03.065588Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@eco/shopify"), path: AnchoredSystemPathBuf("packages/shopify") }}))
+2025-01-18T23:52:03.469505Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/shopify/src/services/discount.service.ts")}
+2025-01-18T23:52:03.469683Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@eco/shopify"), path: AnchoredSystemPathBuf("packages/shopify") }}))
+2025-01-18T23:55:47.074621Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/database/src/config.ts")}
+2025-01-18T23:55:47.074702Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@eco/database"), path: AnchoredSystemPathBuf("packages/database") }}))
+2025-01-18T23:55:52.474920Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/database/src/supabase.ts")}
+2025-01-18T23:55:52.474946Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@eco/database"), path: AnchoredSystemPathBuf("packages/database") }}))
+2025-01-18T23:56:05.675371Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/database/src/index.ts")}
+2025-01-18T23:56:05.677499Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@eco/database"), path: AnchoredSystemPathBuf("packages/database") }}))
+2025-01-18T23:56:15.375678Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/ui/src/components/AuthCallback.tsx")}
+2025-01-18T23:56:15.375697Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@eco/ui"), path: AnchoredSystemPathBuf("packages/ui") }}))
+2025-01-18T23:56:23.578741Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/src/pages/auth/callback.tsx"), AnchoredSystemPathBuf("apps/web/src/pages"), AnchoredSystemPathBuf("apps/web/src/pages/auth")}
+2025-01-18T23:56:23.578762Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@eco/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-01-18T23:56:37.676472Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/ui/src/index.tsx")}
+2025-01-18T23:56:37.676490Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@eco/ui"), path: AnchoredSystemPathBuf("packages/ui") }}))
+2025-01-18T23:57:13.476915Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/database/src/config.ts")}
+2025-01-18T23:57:13.477505Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@eco/database"), path: AnchoredSystemPathBuf("packages/database") }}))
+2025-01-18T23:57:22.084644Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/database/src/supabase.ts")}
+2025-01-18T23:57:22.084662Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@eco/database"), path: AnchoredSystemPathBuf("packages/database") }}))
+2025-01-18T23:57:29.593539Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/ui/src/components/LoginButton.tsx")}
+2025-01-18T23:57:29.593905Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@eco/ui"), path: AnchoredSystemPathBuf("packages/ui") }}))
+2025-01-18T23:57:43.580840Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/ui/src/index.tsx")}
+2025-01-18T23:57:43.580863Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@eco/ui"), path: AnchoredSystemPathBuf("packages/ui") }}))
+2025-01-18T23:57:49.979522Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/src/pages/login.tsx")}
+2025-01-18T23:57:49.979545Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@eco/web"), path: AnchoredSystemPathBuf("apps/web") }}))

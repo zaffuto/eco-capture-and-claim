@@ -7,6 +7,7 @@ export default defineConfig({
   splitting: false,
   sourcemap: true,
   clean: true,
-  jsx: 'react',
-  external: ['react', 'react-dom', 'react-native'],
+  external: ['@eco/shopify', '@eco/database'],
+  treeshake: true,
+  minify: true,
 });
