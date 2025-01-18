@@ -18,7 +18,8 @@
     "dev:mobile": "pnpm run dev --filter=mobile",
     "test": "turbo run test",
     "type-check": "tsc --noEmit",
-    "vercel-build": "pnpm install --frozen-lockfile && pnpm build"
+    "vercel-build": "pnpm install --frozen-lockfile && pnpm build",
+    "postinstall": "corepack enable"
   },
   "devDependencies": {
     "@types/node": "^20.11.0",
@@ -35,8 +36,8 @@
     "typescript": "^5.3.3"
   },
   "engines": {
-    "node": ">=20.11.0",
-    "pnpm": ">=9.8.0"
+    "node": "20.11.0",
+    "pnpm": "9.8.0"
   },
   "pnpm": {
     "overrides": {
@@ -45,6 +46,12 @@
       "@types/react": "^18.2.48",
       "@types/react-dom": "^18.2.18",
       "eslint": "^8.56.0"
+    },
+    "peerDependencyRules": {
+      "allowedVersions": {
+        "react": "18",
+        "react-dom": "18"
+      }
     }
   }
 }

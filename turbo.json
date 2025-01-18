@@ -1,18 +1,29 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "globalDependencies": ["**/.env.*local"],
+  "globalEnv": ["NODE_ENV", "VERCEL", "CI", "VERCEL_ENV"],
   "pipeline": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": ["dist/**", ".next/**", "build/**"]
+      "outputs": ["dist/**", ".next/**", "build/**"],
+      "env": ["NODE_ENV", "VERCEL_ENV"],
+      "cache": true
     },
     "build:dev": {
       "dependsOn": ["^build:dev"],
       "outputs": ["dist/**", ".next/**", "build/**"],
-      "env": ["NODE_ENV=development"]
+      "env": ["NODE_ENV=development"],
+      "cache": true
     },
     "lint": {
-      "outputs": []
+      "dependsOn": ["^build"],
+      "outputs": [".eslintcache"],
+      "cache": true
+    },
+    "test": {
+      "dependsOn": ["^build"],
+      "outputs": ["coverage/**"],
+      "cache": true
     },
     "dev": {
       "cache": false,
@@ -20,6 +31,11 @@
     },
     "clean": {
       "cache": false
+    },
+    "type-check": {
+      "dependsOn": [],
+      "outputs": [],
+      "cache": true
     }
   }
 }
