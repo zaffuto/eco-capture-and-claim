@@ -17,6 +17,8 @@ import {
   BlockStack,
   InlineStack,
   Box,
+  BannerProps,
+  ModalProps,
 } from '@shopify/polaris';
 import { useAuth } from '@eco/shared';
 
@@ -27,9 +29,9 @@ interface DateRange {
   end: Date;
 }
 
-export const EcoCuponManager: React.FC = () => {
+export const EcoCuponManager = () => {
   const { user, session } = useAuth();
-  const [cupons, setCupons] = useState([]);
+  const [cupons, setCupons] = useState<any[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -70,7 +72,7 @@ export const EcoCuponManager: React.FC = () => {
 
       console.log('Cupons loaded:', data);
       setCupons(data || []);
-    } catch (err) {
+    } catch (err: any) {
       console.error('Error in loadCupons:', err);
       setError('Error al cargar cupones: ' + (err.message || 'Unknown error'));
     } finally {
@@ -109,7 +111,7 @@ export const EcoCuponManager: React.FC = () => {
       console.log('Cupon created successfully:', data);
       setIsModalOpen(false);
       await loadCupons();
-    } catch (err) {
+    } catch (err: any) {
       console.error('Error in handleSubmit:', err);
       setError('Error al crear el cupón: ' + (err.message || 'Unknown error'));
     } finally {
@@ -139,7 +141,7 @@ export const EcoCuponManager: React.FC = () => {
 
       console.log('Cupon deactivated successfully');
       await loadCupons();
-    } catch (err) {
+    } catch (err: any) {
       console.error('Error in handleDeactivate:', err);
       setError('Error al desactivar el cupón: ' + (err.message || 'Unknown error'));
     } finally {
@@ -150,10 +152,10 @@ export const EcoCuponManager: React.FC = () => {
   if (!session) {
     return (
       <Card>
-        <BlockStack>
-          <Banner tone="warning">
-            <p>Please sign in to manage cupons</p>
-          </Banner>
+        <BlockStack gap="4">
+          <div>
+            <Banner tone="warning">Please sign in to manage cupons</Banner>
+          </div>
         </BlockStack>
       </Card>
     );
@@ -176,13 +178,15 @@ export const EcoCuponManager: React.FC = () => {
   return (
     <div>
       {error && (
-        <Banner tone="critical" onDismiss={() => setError('')}>
-          <p>{error}</p>
-        </Banner>
+        <div>
+          <Banner status="critical" onDismiss={() => setError('')}>
+            {error}
+          </Banner>
+        </div>
       )}
 
       <Card>
-        <BlockStack>
+        <BlockStack gap="4">
           <InlineStack align="space-between">
             <Text as="h2" variant="headingLg">Eco Cupones</Text>
             <Button 
@@ -195,7 +199,7 @@ export const EcoCuponManager: React.FC = () => {
           </InlineStack>
 
           {loading ? (
-            <div className="flex justify-center p-4">
+            <div style={{ display: 'flex', justifyContent: 'center', padding: '1rem' }}>
               <Spinner accessibilityLabel="Loading cupons" size="large" />
             </div>
           ) : (
@@ -225,7 +229,7 @@ export const EcoCuponManager: React.FC = () => {
         ]}
       >
         <Modal.Section>
-          <BlockStack>
+          <BlockStack gap="4">
             <TextField
               label="Código"
               value={formData.code}
@@ -272,7 +276,7 @@ export const EcoCuponManager: React.FC = () => {
               disabled={loading}
             />
 
-            <Box>
+            <div>
               <Text as="p" variant="bodyMd">Fecha de inicio</Text>
               <DatePicker
                 month={formData.startDate.getMonth()}
@@ -287,15 +291,15 @@ export const EcoCuponManager: React.FC = () => {
                   start: formData.startDate,
                   end: formData.startDate
                 }}
-                onChange={(range) => {
-                  if (range.start) {
-                    setFormData({ ...formData, startDate: range.start });
+                onChange={({ start }) => {
+                  if (start) {
+                    setFormData({ ...formData, startDate: start });
                   }
                 }}
               />
-            </Box>
+            </div>
 
-            <Box>
+            <div>
               <Text as="p" variant="bodyMd">Fecha de expiración</Text>
               <DatePicker
                 month={formData.expiryDate.getMonth()}
@@ -310,13 +314,13 @@ export const EcoCuponManager: React.FC = () => {
                   start: formData.expiryDate,
                   end: formData.expiryDate
                 }}
-                onChange={(range) => {
-                  if (range.start) {
-                    setFormData({ ...formData, expiryDate: range.start });
+                onChange={({ start }) => {
+                  if (start) {
+                    setFormData({ ...formData, expiryDate: start });
                   }
                 }}
               />
-            </Box>
+            </div>
           </BlockStack>
         </Modal.Section>
       </Modal>
