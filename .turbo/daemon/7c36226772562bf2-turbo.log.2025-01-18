@@ -41,3 +41,23 @@
 2025-01-18T16:16:26.540445Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
 2025-01-18T16:16:26.580409Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/bot/.turbo"), AnchoredSystemPathBuf(".turbo/cookies/24.cookie")}
 2025-01-18T16:16:26.580425Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@eco/bot"), path: AnchoredSystemPathBuf("apps/bot") }, WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-01-18T17:51:14.715078Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(""), AnchoredSystemPathBuf("_tmp_7725_9c4dba5738e5ea69799200eae3b61916")}
+2025-01-18T17:51:14.715161Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-01-18T17:51:32.415254Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("_tmp_7745_62cbd4d7cf3a42f642abb680e167053b")}
+2025-01-18T17:51:32.415271Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-01-18T17:51:32.615681Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("_tmp_7745_62cbd4d7cf3a42f642abb680e167053b"), AnchoredSystemPathBuf("")}
+2025-01-18T17:51:32.615706Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-01-18T17:54:47.123119Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(".turbo/cookies/25.cookie")}
+2025-01-18T17:54:47.123134Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-01-18T17:54:47.744337Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(".turbo/cookies/28.cookie"), AnchoredSystemPathBuf(".turbo/cookies/30.cookie"), AnchoredSystemPathBuf(".turbo/cookies/26.cookie"), AnchoredSystemPathBuf(".turbo/cookies/27.cookie"), AnchoredSystemPathBuf(".turbo/cookies/29.cookie"), AnchoredSystemPathBuf(".turbo/cookies/31.cookie")}
+2025-01-18T17:54:47.744402Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-01-18T17:55:15.822415Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(".turbo/cookies/32.cookie")}
+2025-01-18T17:55:15.822886Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-01-18T17:55:16.229219Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(".turbo/cookies/33.cookie"), AnchoredSystemPathBuf(".turbo/cookies/34.cookie")}
+2025-01-18T17:55:16.229286Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-01-18T17:55:19.922288Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/shopify/tsup.config.bundled_zvswibjjpg.mjs")}
+2025-01-18T17:55:19.922328Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@eco/shopify"), path: AnchoredSystemPathBuf("packages/shopify") }}))
+2025-01-18T17:55:20.032838Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2025-01-18T17:55:20.033076Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/shopify/tsup.config.bundled_zvswibjjpg.mjs")}
+2025-01-18T17:55:20.033088Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@eco/shopify"), path: AnchoredSystemPathBuf("packages/shopify") }}))
+2025-01-18T17:55:20.033165Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
