@@ -22,11 +22,6 @@
     "postinstall": "corepack enable"
   },
   "dependencies": {
-    "next": "^14.1.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
-  },
-  "devDependencies": {
     "@radix-ui/react-accordion": "1.2.2",
     "@radix-ui/react-alert-dialog": "1.1.4",
     "@radix-ui/react-aspect-ratio": "1.1.1",
@@ -56,58 +51,43 @@
     "@radix-ui/react-toggle-group": "1.1.1",
     "@radix-ui/react-tooltip": "1.1.6",
     "@tanstack/react-query": "5.64.1",
-    "@types/node": "20.17.14",
-    "@types/react": "18.3.18",
-    "@typescript-eslint/eslint-plugin": "6.21.0",
-    "@typescript-eslint/parser": "6.21.0",
-    "@vitejs/plugin-react-swc": "3.7.2",
     "class-variance-authority": "0.7.1",
     "cmdk": "1.0.4",
     "embla-carousel-react": "8.5.2",
-    "eslint": "8.57.1",
-    "eslint-config-prettier": "9.1.0",
-    "eslint-plugin-react": "7.37.4",
-    "eslint-plugin-react-hooks": "4.6.2",
-    "eslint-plugin-react-refresh": "0.4.18",
-    "expo-barcode-scanner": "13.0.1",
-    "expo-camera": "16.0.11",
-    "expo-constants": "17.0.4",
-    "expo-location": "18.0.5",
     "input-otp": "1.4.2",
     "lovable-tagger": "1.0.19",
     "lucide-react": "0.473.0",
+    "next": "^14.1.0",
     "next-themes": "0.4.4",
-    "prettier": "3.4.2",
+    "react": "^18.2.0",
     "react-day-picker": "9.5.0",
+    "react-dom": "^18.2.0",
     "react-hook-form": "7.54.2",
-    "react-native": "0.76.6",
     "react-resizable-panels": "2.1.7",
     "react-router-dom": "7.1.3",
     "recharts": "2.15.0",
     "sonner": "1.7.2",
     "tailwind-merge": "2.6.0",
+    "vaul": "1.1.2"
+  },
+  "devDependencies": {
+    "@types/node": "20.17.14",
+    "@types/react": "18.3.18",
+    "@typescript-eslint/eslint-plugin": "6.21.0",
+    "@typescript-eslint/parser": "6.21.0",
+    "@vitejs/plugin-react-swc": "3.7.2",
+    "eslint": "8.57.1",
+    "eslint-config-prettier": "9.1.0",
+    "eslint-plugin-react": "7.37.4",
+    "eslint-plugin-react-hooks": "4.6.2",
+    "eslint-plugin-react-refresh": "0.4.18",
+    "prettier": "3.4.2",
     "turbo": "1.13.4",
     "typescript": "5.7.3",
-    "vaul": "1.1.2",
     "vite": "^6.0.7"
   },
   "engines": {
     "node": "20.11.0",
     "pnpm": ">=9.8.0"
-  },
-  "pnpm": {
-    "overrides": {
-      "react": "^18.2.0",
-      "react-dom": "^18.2.0",
-      "@types/react": "^18.2.48",
-      "@types/react-dom": "^18.2.18",
-      "eslint": "^8.56.0"
-    },
-    "peerDependencyRules": {
-      "allowedVersions": {
-        "react": "18",
-        "react-dom": "18"
-      }
-    }
   }
 }
