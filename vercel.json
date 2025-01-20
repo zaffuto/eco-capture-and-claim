@@ -7,5 +7,14 @@
   "installCommand": "pnpm install",
   "outputDirectory": "apps/web/.next",
   "regions": ["gru1"],
-  "public": true
+  "public": true,
+  "monorepo": true,
+  "rootDirectory": "apps/web",
+  "ignoreCommand": "git diff HEAD^ HEAD --quiet ./",
+  "builds": [
+    {
+      "src": "apps/web/next.config.js",
+      "use": "@vercel/next"
+    }
+  ]
 }
