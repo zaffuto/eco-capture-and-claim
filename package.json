@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "dev": "turbo run dev",
-    "build": "turbo run build --filter=!@eco/database",
+    "build": "turbo run build --filter=web...",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md,json}\"",
     "clean": "turbo run clean && rm -rf node_modules .turbo",
@@ -17,7 +17,7 @@
     "dev:mobile": "pnpm run dev --filter=mobile",
     "test": "turbo run test",
     "type-check": "tsc --noEmit",
-    "vercel-build": "pnpm install --no-frozen-lockfile && pnpm build",
+    "vercel-build": "pnpm install && turbo run build --filter=web...",
     "postinstall": "corepack enable"
   },
   "dependencies": {
