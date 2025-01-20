@@ -1,19 +1,6 @@
 {
-  "$schema": "https://openapi.vercel.sh/vercel.json",
   "version": 2,
-  "framework": "nextjs",
   "buildCommand": "cd apps/web && pnpm install && pnpm build",
-  "devCommand": "cd apps/web && pnpm dev",
-  "installCommand": "pnpm install",
   "outputDirectory": "apps/web/.next",
-  "regions": ["gru1"],
-  "public": true,
-  "rootDirectory": "apps/web",
-  "ignoreCommand": "git diff HEAD^ HEAD --quiet ./",
-  "builds": [
-    {
-      "src": "apps/web/next.config.js",
-      "use": "@vercel/next"
-    }
-  ]
+  "installCommand": "pnpm install"
 }
