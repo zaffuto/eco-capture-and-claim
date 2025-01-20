@@ -35,10 +35,6 @@ export const Auth = () => {
     return () => subscription.unsubscribe();
   }, []);
 
-  useEffect(() => {
-    window.location.href = "https://app.ecocupon.cl";
-  }, []);
-
   // Get the current hostname to determine the environment
   const isDevelopment = window.location.hostname === 'localhost' || 
                        window.location.hostname.includes('vercel.app');
