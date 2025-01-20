@@ -10,7 +10,6 @@
   "scripts": {
     "dev": "turbo run dev",
     "build": "turbo run build --filter=!@eco/database",
-    "build:dev": "turbo run build:dev",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md,json}\"",
     "clean": "turbo run clean && rm -rf node_modules .turbo",
@@ -18,7 +17,7 @@
     "dev:mobile": "pnpm run dev --filter=mobile",
     "test": "turbo run test",
     "type-check": "tsc --noEmit",
-    "vercel-build": "pnpm install --frozen-lockfile && pnpm build",
+    "vercel-build": "pnpm install --frozen-lockfile --prefer-offline && pnpm build",
     "postinstall": "corepack enable"
   },
   "dependencies": {
@@ -52,11 +51,11 @@
     "@radix-ui/react-tooltip": "1.1.6",
     "@tanstack/react-query": "5.64.1",
     "class-variance-authority": "0.7.1",
-    "cmdk": "1.0.4",
+    "cmdk": "1.4.4",
     "embla-carousel-react": "8.5.2",
     "input-otp": "1.4.2",
-    "lovable-tagger": "1.0.19",
     "lucide-react": "0.473.0",
+    "lovable-tagger": "1.0.19",
     "next": "^14.1.0",
     "next-themes": "0.4.4",
     "react": "^18.2.0",
@@ -81,11 +80,14 @@
     "eslint-plugin-react-hooks": "4.6.2",
     "eslint-plugin-react-refresh": "0.4.18",
     "prettier": "3.4.2",
-    "turbo": "1.13.4",
+    "turbo": "2.3.3",
     "typescript": "5.7.3"
   },
   "engines": {
     "node": "20.11.0",
     "pnpm": ">=9.8.0"
+  },
+  "resolutions": {
+    "@whiskeysockets/eslint-config": "https://github.com/whiskeysockets/eslint-config.git"
   }
 }
