@@ -1,21 +1,20 @@
 {
   "version": 2,
   "framework": "nextjs",
-  "buildCommand": "cd apps/web && pnpm install && pnpm build",
+  "buildCommand": "pnpm install && cd apps/web && pnpm build",
   "outputDirectory": "apps/web/.next",
   "installCommand": "pnpm install",
   "regions": ["gru1"],
   "builds": [
     {
-      "src": "apps/web/package.json",
+      "src": "apps/web/next.config.js",
       "use": "@vercel/next"
     }
   ],
-  "routes": [
+  "rewrites": [
     {
-      "src": "/(.*)",
-      "dest": "apps/web/$1",
-      "continue": true
+      "source": "/(.*)",
+      "destination": "/apps/web/$1"
     }
   ]
 }
