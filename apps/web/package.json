@@ -6,12 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "clean": "rm -rf .next"
+    "lint": "next lint"
   },
   "dependencies": {
-    "@eco/shopify": "0.0.0",
-    "@eco/ui": "0.0.0",
+    "@eco/shopify": "workspace:*",
+    "@eco/ui": "workspace:*",
     "@shopify/polaris": "^13.9.2",
     "@supabase/auth-helpers-nextjs": "^0.8.7",
     "@supabase/auth-ui-react": "^0.4.7",
