@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@shopify/app-bridge": "^3.5.1",
-    "@shopify/app-bridge-react": "^3.5.1",
+    "@shopify/app-bridge-react": "^4.1.6",
     "@shopify/app-bridge-utils": "^3.5.1",
     "@shopify/polaris": "^13.9.2",
     "@shopify/shopify-api": "^8.1.1",

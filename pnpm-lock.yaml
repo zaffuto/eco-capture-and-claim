@@ -355,8 +355,8 @@ importers:
         specifier: ^3.5.1
         version: 3.5.1
       '@shopify/app-bridge-react':
-        specifier: ^3.5.1
-        version: 3.5.1(react@18.3.1)
+        specifier: ^4.1.6
+        version: 4.1.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@shopify/app-bridge-utils':
         specifier: ^3.5.1
         version: 3.5.1
@@ -1936,10 +1936,14 @@ packages:
   '@rushstack/eslint-patch@1.10.5':
     resolution: {integrity: sha512-kkKUDVlII2DQiKy7UstOR1ErJP8kUKAQ4oa+SQtM0K+lPdmmjj0YnnxBgtTVYH7mUKtbsxeFC9y0AmK7Yb78/A==}
 
-  '@shopify/app-bridge-react@3.5.1':
-    resolution: {integrity: sha512-Z/OlLqF1izkCdb5ufi0Zb5XdmS5R+TLycV7LUQU2zzcaFLfVuStzP1oKHS6a/WG6lbhgGCxSaqg4+PN0dRBFag==}
+  '@shopify/app-bridge-react@4.1.6':
+    resolution: {integrity: sha512-/Txi1L8ihV2ZK1w7Qh6+wsCITknQI7XS89nYYbqF7y2+hne446VM2DEsO7EVWz0MFc2tFA2IILjxdwVYSREYWw==}
     peerDependencies:
-      react: ^16.0.0 || ^17.0.0 || ^18.0.0
+      react: ^18.0.0
+      react-dom: ^18.0.0
+
+  '@shopify/app-bridge-types@0.0.16':
+    resolution: {integrity: sha512-UjKot8gOAv0qc9dxaooQv9fl1ob6zlupuOAgexj++H8cYQuAD8I6cbJ/whY4skqRXM/qZn68vuERq3eeDlByJg==}
 
   '@shopify/app-bridge-utils@3.5.1':
     resolution: {integrity: sha512-VZRvRfg1nF/0/C7zIwYlQ2RXY2S7ALw04Lp6vXPkzBxggDYakx9Lbvc5/k7ZTvhwZv2q8+FVHh319IMW81b27Q==}
@@ -2417,15 +2421,15 @@ packages:
       sharp:
         optional: true
 
-  '@whiskeysockets/eslint-config@https://codeload.github.com/whiskeysockets/eslint-config/tar.gz/326b55f2842668f4e11f471451c4e39819a0e1bf':
-    resolution: {tarball: https://codeload.github.com/whiskeysockets/eslint-config/tar.gz/326b55f2842668f4e11f471451c4e39819a0e1bf}
+  '@whiskeysockets/eslint-config@git+https://git@github.com:whiskeysockets/eslint-config.git#326b55f2842668f4e11f471451c4e39819a0e1bf':
+    resolution: {commit: 326b55f2842668f4e11f471451c4e39819a0e1bf, repo: git@github.com:whiskeysockets/eslint-config.git, type: git}
     version: 1.0.0
     peerDependencies:
       eslint: '*'
       typescript: '>=4'
 
-  '@whiskeysockets/libsignal-node@https://codeload.github.com/WhiskeySockets/libsignal-node/tar.gz/1bd9275d9e621d2ba899087ebdf548b3a5a4f05e':
-    resolution: {tarball: https://codeload.github.com/WhiskeySockets/libsignal-node/tar.gz/1bd9275d9e621d2ba899087ebdf548b3a5a4f05e}
+  '@whiskeysockets/libsignal-node@git+https://git@github.com:WhiskeySockets/libsignal-node.git#1bd9275d9e621d2ba899087ebdf548b3a5a4f05e':
+    resolution: {commit: 1bd9275d9e621d2ba899087ebdf548b3a5a4f05e, repo: git@github.com:WhiskeySockets/libsignal-node.git, type: git}
     version: 2.0.1
 
   acorn-jsx@5.3.2:
@@ -6876,10 +6880,13 @@ snapshots:
 
   '@rushstack/eslint-patch@1.10.5': {}
 
-  '@shopify/app-bridge-react@3.5.1(react@18.3.1)':
+  '@shopify/app-bridge-react@4.1.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@shopify/app-bridge': 3.5.1
+      '@shopify/app-bridge-types': 0.0.16
       react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+
+  '@shopify/app-bridge-types@0.0.16': {}
 
   '@shopify/app-bridge-utils@3.5.1':
     dependencies:
@@ -7412,14 +7419,14 @@ snapshots:
     dependencies:
       '@adiwajshing/keyed-db': 0.2.4
       '@hapi/boom': 9.1.4
-      '@whiskeysockets/eslint-config': https://codeload.github.com/whiskeysockets/eslint-config/tar.gz/326b55f2842668f4e11f471451c4e39819a0e1bf(eslint@8.57.1)(typescript@5.7.3)
+      '@whiskeysockets/eslint-config': git+https://git@github.com:whiskeysockets/eslint-config.git#326b55f2842668f4e11f471451c4e39819a0e1bf(eslint@8.57.1)(typescript@5.7.3)
       async-lock: 1.4.1
       audio-decode: 2.2.2
       axios: 1.7.9
       cache-manager: 5.7.6
       futoin-hkdf: 1.5.3
       libphonenumber-js: 1.11.18
-      libsignal: '@whiskeysockets/libsignal-node@https://codeload.github.com/WhiskeySockets/libsignal-node/tar.gz/1bd9275d9e621d2ba899087ebdf548b3a5a4f05e'
+      libsignal: '@whiskeysockets/libsignal-node@git+https://git@github.com:WhiskeySockets/libsignal-node.git#1bd9275d9e621d2ba899087ebdf548b3a5a4f05e'
       lodash: 4.17.21
       music-metadata: 7.14.0
       node-cache: 5.1.2
@@ -7437,7 +7444,7 @@ snapshots:
       - typescript
       - utf-8-validate
 
-  '@whiskeysockets/eslint-config@https://codeload.github.com/whiskeysockets/eslint-config/tar.gz/326b55f2842668f4e11f471451c4e39819a0e1bf(eslint@8.57.1)(typescript@5.7.3)':
+  '@whiskeysockets/eslint-config@git+https://git@github.com:whiskeysockets/eslint-config.git#326b55f2842668f4e11f471451c4e39819a0e1bf(eslint@8.57.1)(typescript@5.7.3)':
     dependencies:
       '@typescript-eslint/eslint-plugin': 7.18.0(@typescript-eslint/parser@7.18.0(eslint@8.57.1)(typescript@5.7.3))(eslint@8.57.1)(typescript@5.7.3)
       '@typescript-eslint/parser': 7.18.0(eslint@8.57.1)(typescript@5.7.3)
@@ -7447,7 +7454,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@whiskeysockets/libsignal-node@https://codeload.github.com/WhiskeySockets/libsignal-node/tar.gz/1bd9275d9e621d2ba899087ebdf548b3a5a4f05e':
+  '@whiskeysockets/libsignal-node@git+https://git@github.com:WhiskeySockets/libsignal-node.git#1bd9275d9e621d2ba899087ebdf548b3a5a4f05e':
     dependencies:
       curve25519-js: 0.0.4
       protobufjs: 6.8.8
