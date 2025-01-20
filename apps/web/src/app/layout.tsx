@@ -1,21 +1,19 @@
-import { Inter } from 'next/font/google';
-import './globals.css';
+import './globals.css'
+import type { Metadata } from 'next'
 
-const inter = Inter({ subsets: ['latin'] });
-
-export const metadata = {
-  title: 'EcoCapture - Gestión de Cupones',
-  description: 'Sistema de gestión de cupones ecológicos',
-};
+export const metadata: Metadata = {
+  title: 'EcoCupón - Inicio',
+  description: 'Plataforma de cupones ecológicos',
+}
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
   return (
     <html lang="es">
-      <body className={inter.className}>{children}</body>
+      <body>{children}</body>
     </html>
-  );
+  )
 }
