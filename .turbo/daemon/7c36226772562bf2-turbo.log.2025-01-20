@@ -56,3 +56,15 @@
 2025-01-20T09:01:52.693676Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
 2025-01-20T09:02:20.793579Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("pnpm-lock.yaml"), AnchoredSystemPathBuf("pnpm-lock.yaml.2972144201")}
 2025-01-20T09:02:20.793598Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-01-20T09:04:23.494744Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("package.json")}
+2025-01-20T09:04:23.494965Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(All)
+2025-01-20T09:04:41.994394Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/package.json")}
+2025-01-20T09:04:41.994412Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@eco/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-01-20T09:04:55.396038Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/vite.config.ts"), AnchoredSystemPathBuf("vite.config.ts")}
+2025-01-20T09:04:55.396059Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }, WorkspacePackage { name: Other("@eco/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-01-20T09:05:04.797684Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(""), AnchoredSystemPathBuf("_tmp_23923_de5124ad4926e2c4cfe803d634e44796")}
+2025-01-20T09:05:04.797706Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-01-20T09:05:43.294548Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("pnpm-lock.yaml.1317624482")}
+2025-01-20T09:05:43.294772Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-01-20T09:05:43.396383Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("pnpm-lock.yaml.1317624482"), AnchoredSystemPathBuf("pnpm-lock.yaml")}
+2025-01-20T09:05:43.396405Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
