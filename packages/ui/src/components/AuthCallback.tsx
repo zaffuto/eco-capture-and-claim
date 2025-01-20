@@ -1,27 +1,19 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { supabase } from '@eco/database';
 
 export function AuthCallback() {
   const router = useRouter();
 
   useEffect(() => {
-    const { data: authListener } = supabase.auth.onAuthStateChange(async (event, session) => {
-      if (event === 'SIGNED_IN' && session) {
-        await router.push('/dashboard');
-      }
-    });
-
-    return () => {
-      authListener?.subscription.unsubscribe();
-    };
+    // Temporary disabled auth state change listener
+    return () => {};
   }, [router]);
 
   return (
     <div className="flex min-h-screen items-center justify-center">
       <div className="text-center">
-        <h1 className="text-2xl font-bold mb-4">Autenticando...</h1>
-        <p>Por favor espere mientras lo redirigimos.</p>
+        <h1 className="text-2xl font-bold mb-4">Sistema en Mantenimiento</h1>
+        <p>La autenticación está temporalmente deshabilitada.</p>
       </div>
     </div>
   );

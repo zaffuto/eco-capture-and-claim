@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Camera } from 'expo-camera';
-import { BarCodeScanner } from 'expo-barcode-scanner';
+import { BarCodeScanner, BarCodeScannerResult } from 'expo-barcode-scanner';
 import * as Location from 'expo-location';
 import { supabase } from '@eco/database';
-import { RecyclingRecord } from '@eco/shared';
 
-export const QRScanScreen = () => {
+export default function QRScanScreen() {
   const [hasPermission, setHasPermission] = useState<boolean | null>(null);
   const [scanned, setScanned] = useState(false);
   const [location, setLocation] = useState<Location.LocationObject | null>(null);
@@ -16,77 +15,65 @@ export const QRScanScreen = () => {
       const { status: cameraStatus } = await Camera.requestCameraPermissionsAsync();
       const { status: locationStatus } = await Location.requestForegroundPermissionsAsync();
       
-      setHasPermission(
-        cameraStatus === 'granted' && locationStatus === 'granted'
-      );
+      setHasPermission(cameraStatus === 'granted' && locationStatus === 'granted');
+      
+      if (locationStatus === 'granted') {
+        const location = await Location.getCurrentPositionAsync({});
+        setLocation(location);
+      }
     })();
   }, []);
 
-  const handleBarCodeScanned = async ({ data }: { data: string }) => {
+  const handleBarCodeScanned = async ({ data }: BarCodeScannerResult) => {
+    setScanned(true);
     try {
-      setScanned(true);
-      
-      // Get current location
-      const location = await Location.getCurrentPositionAsync({});
-      setLocation(location);
-
-      // Create recycling record
-      const { data: record, error } = await supabase
+      const { error } = await supabase
         .from('recycling_records')
         .insert({
-          container_id: data,
-          location: `(${location.coords.latitude},${location.coords.longitude})`,
-          battery_type: 'default', // This should come from QR data
-        })
-        .select()
-        .single();
+          containerId: data,
+          location: {
+            latitude: location?.coords.latitude,
+            longitude: location?.coords.longitude,
+          },
+          timestamp: new Date(),
+        });
 
       if (error) throw error;
-
-      // Show success message
-      alert('¡Contenedor registrado con éxito!');
+      alert(`QR code scanned successfully!`);
     } catch (error) {
-      console.error('Error al escanear:', error);
-      alert('Error al registrar el contenedor. Por favor intenta de nuevo.');
+      console.error('Error saving scan:', error);
+      alert('Error saving scan. Please try again.');
     }
   };
 
   if (hasPermission === null) {
-    return <Text>Solicitando permisos de cámara...</Text>;
+    return <Text>Requesting camera permission</Text>;
   }
   if (hasPermission === false) {
-    return <Text>Sin acceso a la cámara</Text>;
+    return <Text>No access to camera</Text>;
   }
 
   return (
     <View style={styles.container}>
-      <Camera
+      <BarCodeScanner
         style={styles.camera}
-        type={Camera.Constants.Type.back}
-        barCodeScannerSettings={{
-          barCodeTypes: [BarCodeScanner.Constants.BarCodeType.qr],
-        }}
+        barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
       >
-        <View style={styles.overlay}>
-          <View style={styles.unfocusedContainer}></View>
-          <View style={styles.focusedContainer}>
-            <View style={styles.scanner} />
-          </View>
-          <View style={styles.unfocusedContainer}></View>
+        <View style={styles.buttonContainer}>
+          {scanned && (
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => setScanned(false)}
+            >
+              <Text style={styles.text}>Tap to Scan Again</Text>
+            </TouchableOpacity>
+          )}
         </View>
-      </Camera>
-      {scanned && (
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => setScanned(false)}
-        >
-          <Text style={styles.buttonText}>Escanear otro</Text>
-        </TouchableOpacity>
-      )}
+      </BarCodeScanner>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -95,38 +82,23 @@ const styles = StyleSheet.create({
   camera: {
     flex: 1,
   },
-  overlay: {
+  buttonContainer: {
     flex: 1,
     backgroundColor: 'transparent',
-  },
-  unfocusedContainer: {
-    flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.7)',
-  },
-  focusedContainer: {
-    flex: 2,
-    alignItems: 'center',
-  },
-  scanner: {
-    width: 300,
-    height: 300,
-    borderWidth: 2,
-    borderColor: '#00FF00',
-    backgroundColor: 'transparent',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    margin: 20,
   },
   button: {
-    position: 'absolute',
-    bottom: 50,
-    left: '25%',
-    right: '25%',
-    backgroundColor: '#2563eb',
+    flex: 0.1,
+    alignSelf: 'flex-end',
+    alignItems: 'center',
+    backgroundColor: '#fff',
     padding: 15,
     borderRadius: 10,
-    alignItems: 'center',
   },
-  buttonText: {
-    color: 'white',
-    fontSize: 16,
-    fontWeight: 'bold',
+  text: {
+    fontSize: 18,
+    color: '#000',
   },
 });

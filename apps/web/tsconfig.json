@@ -21,7 +21,29 @@
         "name": "next"
       }
     ],
-    "target": "ES2017"
+    "target": "ES2017",
+    "baseUrl": ".",
+    "paths": {
+      "@eco/ui": [
+        "../../packages/ui/src"
+      ],
+      "@eco/ui/*": [
+        "../../packages/ui/src/*"
+      ],
+      "@eco/database": [
+        "../../packages/database/src"
+      ],
+      "@eco/database/*": [
+        "../../packages/database/src/*"
+      ],
+      "@eco/shared": [
+        "../../packages/shared/src"
+      ],
+      "@eco/shared/*": [
+        "../../packages/shared/src/*"
+      ]
+    },
+    "strictNullChecks": true
   },
   "include": [
     "next-env.d.ts",

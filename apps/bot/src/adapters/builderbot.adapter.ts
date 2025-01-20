@@ -24,7 +24,7 @@ export interface WhatsAppMessage {
 }
 
 export class WhatsAppAdapter extends EventEmitter {
-  private socket: ReturnType<typeof makeWASocket>;
+  private socket!: ReturnType<typeof makeWASocket>;
   private store: ReturnType<typeof makeInMemoryStore>;
   private authPath: string;
 

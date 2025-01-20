@@ -25,15 +25,25 @@ const steps = [
 ];
 
 const Index = () => {
-  const [currentStep, setCurrentStep] = useState(0);
+  const [currentStep] = useState(0);
+  const [capturedImage, setCapturedImage] = useState<string | null>(null);
   const { user, loading } = useAuth();
 
   console.log("Index component rendered", { user, loading });
 
+  const handleCapture = (imageData: string) => {
+    setCapturedImage(imageData);
+  };
+
   const renderStep = () => {
     switch (currentStep) {
       case 0:
-        return <ImageCapture />;
+        return (
+          <ImageCapture
+            onCapture={handleCapture}
+            capturedImage={capturedImage}
+          />
+        );
       case 1:
         return <QRScanner />;
       case 2:
@@ -84,6 +94,17 @@ const Index = () => {
 
         <div className="relative">
           {renderStep()}
+          {capturedImage && (
+            <div>
+              <img
+                src={`data:image/jpeg;base64,${capturedImage}`}
+                alt="Captured"
+              />
+              <button onClick={() => setCapturedImage(null)}>
+                Tomar otra foto
+              </button>
+            </div>
+          )}
         </div>
 
         <div className="flex justify-between items-center max-w-xs mx-auto">
