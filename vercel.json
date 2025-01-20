@@ -8,7 +8,6 @@
   "outputDirectory": "apps/web/.next",
   "regions": ["gru1"],
   "public": true,
-  "monorepo": true,
   "rootDirectory": "apps/web",
   "ignoreCommand": "git diff HEAD^ HEAD --quiet ./",
   "builds": [
